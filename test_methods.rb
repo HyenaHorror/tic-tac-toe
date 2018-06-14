@@ -115,4 +115,24 @@ class TicTacToe_Test < Minitest::Test
     expected = true
     assert_equal(expected, actual)
   end
+  def test_diagonal_win_1
+    b = Board.new
+    b.make_move("X", "A1")
+    b.make_move("X", "B2")
+    b.make_move("X", "C3")
+    b.check_win
+    actual = b.check_win
+    expected = true
+    assert_equal(expected, actual)
+  end
+  def test_diagonal_win_2
+    b = Board.new
+    b.make_move("O", "A3")
+    b.make_move("O", "B2")
+    b.make_move("O", "C1")
+    b.check_win
+    actual = b.check_win
+    expected = true
+    assert_equal(expected, actual)
+  end
 end

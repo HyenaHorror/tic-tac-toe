@@ -29,22 +29,25 @@ class Board
     columns = ["A", "B", "C"]
     rows = ["1", "2", "3"]
     win = false
-    until win == true
-      #horizontal
-      columns.each do |c|
-        if @current_state["#{c}1"] == @current_state["#{c}2"] && @current_state["#{c}3"] == @current_state["#{c}1"]
-          win = true
-          return win
-        end
+    #horizontal
+    columns.each do |c|
+      if @current_state["#{c}1"] == @current_state["#{c}2"] && @current_state["#{c}3"] == @current_state["#{c}1"]
+        win = true
+        return win
       end
-      #vertical
-      rows.each do |r|
-        if @current_state["A#{r}"] == @current_state["B#{r}"] && @current_state["C#{r}"] == @current_state["A#{r}"]
-          win = true
-          return win
-        end
+    end
+    #vertical
+    rows.each do |r|
+      if @current_state["A#{r}"] == @current_state["B#{r}"] && @current_state["C#{r}"] == @current_state["A#{r}"]
+        win = true
+        return win
       end
-      #diagonal
+    end
+    #diagonal
+    if @current_state["A1"] == @current_state["B2"] && @current_state["C3"] == @current_state["A1"]
+      win = true
+    elsif @current_state["A3"] == @current_state["B2"] && @current_state["C1"] == @current_state["A3"]
+      win = true
     end
     return win
   end
