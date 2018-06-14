@@ -45,4 +45,14 @@ class TicTacToe_Test < Minitest::Test
     }
     assert_equal(expected, actual)
   end
+
+  def test_bad_move_1
+    b = Board.new
+    b.make_move("X", "A1")
+    actual = b.make_move("O", "A1")
+
+    expected = "Invalid move!"
+    assert_equal(expected, actual)
+  end
+
 end
