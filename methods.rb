@@ -28,15 +28,24 @@ class Board
   def check_win
     columns = ["A", "B", "C"]
     rows = ["1", "2", "3"]
-    #horizontal
-    columns.each do |c|
-      if @current_state["#{c}1"] == @current_state["#{c}2"] && @current_state["#{c}3"] == @current_state["#{c}1"]
-        return true
-      else
-        return false
+    win = false
+    until win == true
+      #horizontal
+      columns.each do |c|
+        if @current_state["#{c}1"] == @current_state["#{c}2"] && @current_state["#{c}3"] == @current_state["#{c}1"]
+          win = true
+          return win
+        end
       end
+      #vertical
+      rows.each do |r|
+        if @current_state["A#{r}"] == @current_state["B#{r}"] && @current_state["C#{r}"] == @current_state["A#{r}"]
+          win = true
+          return win
+        end
+      end
+      #diagonal
     end
-    #vertical
-    #diagonal
+    return win
   end
 end
