@@ -51,4 +51,16 @@ class Board
     end
     return win
   end
+
+  def check_draw
+    available_positions = 9
+
+    @current_state.each do |pos|
+      if pos != " "
+        available_positions -= 1
+      end
+    end
+
+    available_positions != 0
+  end
 end
