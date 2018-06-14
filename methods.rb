@@ -24,4 +24,19 @@ class Board
       return "Invalid move!"
     end
   end
+
+  def check_win
+    columns = ["A", "B", "C"]
+    rows = ["1", "2", "3"]
+    #horizontal
+    columns.each do |c|
+      if @current_state["#{c}1"] == @current_state["#{c}2"] && @current_state["#{c}3"] == @current_state["#{c}1"]
+        return true
+      else
+        return false
+      end
+    end
+    #vertical
+    #diagonal
+  end
 end
