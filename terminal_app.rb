@@ -16,7 +16,7 @@ def display_board
     change_player
     puts "#{$current_player} wins!"
     play_again
-  elsif $board.check_draw == false
+  elsif $board.check_draw == true
     puts "Draw!"
     play_again
   else

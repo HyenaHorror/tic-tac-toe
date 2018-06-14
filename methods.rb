@@ -60,7 +60,7 @@ class Board
         available_positions -= 1
       end
     end
-
-    available_positions != 0
+    puts "available_positions: #{available_positions}"
+    available_positions == 0    
   end
 end
