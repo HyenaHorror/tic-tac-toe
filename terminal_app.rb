@@ -12,8 +12,12 @@ def display_board
   ---------
   #{b["C1"]} | #{b["C2"]} | #{b["C3"]}
   """
-
-  get_next_move_pvp
+  if $board.check_win == true
+    change_player
+    puts "#{$current_player} wins!"
+  else
+    get_next_move_pvp
+  end
 end
 
 def get_next_move_pvp
@@ -25,6 +29,7 @@ def get_next_move_pvp
     fail_check = $board.make_move($current_player, move)
 
     if fail_check != "Invalid move!"
+      succcess = true
       change_player
       display_board
     else
