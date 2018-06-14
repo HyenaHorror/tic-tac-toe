@@ -140,15 +140,15 @@ class TicTacToe_Test < Minitest::Test
     b.make_move("X", "A1")
     b.make_move("O", "B2")
     b.make_move("X", "C1")
-    b.make_move("O", "B2")
+    b.make_move("O", "B1")
     b.make_move("X", "B3")
     b.make_move("O", "C2")
     b.make_move("X", "A2")
-    b.make_move("O", "A1")
+    b.make_move("O", "A3")
     b.make_move("X", "C3")
     b.check_win
-    actual = b.check_win
-    expected = false
+    actual = b.check_draw
+    expected = true
     assert_equal(expected, actual)
   end
 end
