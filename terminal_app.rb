@@ -15,8 +15,18 @@ def display_board
   if $board.check_win == true
     change_player
     puts "#{$current_player} wins!"
+    play_again
   else
     get_next_move_pvp
+  end
+end
+
+def play_again
+  puts "Press Enter to play again."
+  choice = gets.chomp
+  if choice == ""
+    $board = Board.new
+    display_board
   end
 end
 
