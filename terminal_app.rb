@@ -17,12 +17,30 @@ def display_board
 end
 
 def get_next_move_pvp
-  print "Enter your move player #{$current_player}\n> "
-  move = gets.chomp.upcase
-  puts "move is: #{move}"
-  $board.make_move($current_player, move)
-  display_board
+  success = false
+  until success == true
+    print "Enter your move player #{$current_player}\n> "
+    move = gets.chomp.upcase
+
+    fail_check = $board.make_move($current_player, move)
+
+    if fail_check != "Invalid move!"
+      change_player
+      display_board
+    else
+      puts "Invalid move!"
+    end
+  end
 end
+
+def change_player
+  if $current_player == "X"
+    $current_player = "O"
+  else
+    $current_player = "X"
+  end
+end
+
 system "clear"
 puts "Welcome to Tic-Tac-Toe!\n\n(Player vs Player only)"
 puts "Ready to play?"
