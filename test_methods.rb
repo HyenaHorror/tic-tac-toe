@@ -1,5 +1,5 @@
 require "minitest/autorun"
-require_relative "methods.rb"
+require_relative "board.rb"
 
 class TicTacToe_Test < Minitest::Test
   def test_bool
