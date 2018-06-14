@@ -1,5 +1,6 @@
 require "minitest/autorun"
 require_relative "board.rb"
+require_relative "random_ai.rb"
 
 class TicTacToe_Test < Minitest::Test
   def test_bool
@@ -18,7 +19,6 @@ class TicTacToe_Test < Minitest::Test
       "C3" => " "
     }
     actual = Board.new.return_board
-    puts Board.new
     assert_equal(expected, actual)
   end
   def test_make_move_a1_x
@@ -150,5 +150,30 @@ class TicTacToe_Test < Minitest::Test
     actual = b.check_draw
     expected = true
     assert_equal(expected, actual)
+  end
+
+  def test_rand_ai_valid_pos1
+    position = RandomAI.new.choose_position
+
+    a = position[0].ord >= 65 && position[0].ord <= 67
+    b = position[1].to_i >= 1 && position[1].to_i <= 3
+    actual = a && b
+    assert_equal(true, actual)
+  end
+  def test_rand_ai_valid_pos2
+    position = RandomAI.new.choose_position
+
+    a = position[0].ord >= 65 && position[0].ord <= 67
+    b = position[1].to_i >= 1 && position[1].to_i <= 3
+    actual = a && b
+    assert_equal(true, actual)
+  end
+  def test_rand_ai_valid_pos3
+    position = RandomAI.new.choose_position
+
+    a = position[0].ord >= 65 && position[0].ord <= 67
+    b = position[1].to_i >= 1 && position[1].to_i <= 3
+    actual = a && b
+    assert_equal(true, actual)
   end
 end
