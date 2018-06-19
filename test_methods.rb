@@ -480,33 +480,6 @@ class TicTacToe_Test < Minitest::Test
     refute_equal(expected, actual)
   end
 
-  # def test_sequential_ai_solo_1
-  #   game = Game.new
-  #   until @valid_move != "Invalid move!"
-  #     @valid_move = SequentialAI.new.make_move(game, "X")
-  #   end
-  #   actual = game.return_board
-  #   expected = {
-  #     "A1" => "X",  "A2" => "X",  "A3" => "X",
-  #     "B1" => "X",  "B2" => "X",  "B3" => "X",
-  #     "C1" => "X",  "C2" => "X",  "C3" => "X"
-  #   }
-  #   assert_equal(expected, actual)
-  # end
-  # def test_sequential_ai_solo_2
-  #   game = Game.new
-  #   until @valid_move != "Invalid move!"
-  #     @valid_move = SequentialAI.new.make_move(game, "O")
-  #   end
-  #   actual = game.return_board
-  #   expected = {
-  #     "A1" => "O",  "A2" => "O",  "A3" => "O",
-  #     "B1" => "O",  "B2" => "O",  "B3" => "O",
-  #     "C1" => "O",  "C2" => "O",  "C3" => "O"
-  #   }
-  #   assert_equal(expected, actual)
-  # end
-
   def test_seqai_one_turn
     game = Game.new
     SequentialAI.new.make_move(game, "O")
@@ -544,6 +517,23 @@ class TicTacToe_Test < Minitest::Test
     }
     assert_equal(expected, actual)
   end
+  def test_seqai_one_at_a_time_full
+    game = Game.new
+
+    4.times do
+      SequentialAI.new.make_move(game, "X")
+      SequentialAI.new.make_move(game, "O")
+    end
+    SequentialAI.new.make_move(game, "X")
+
+    actual = game.return_board
+    expected = {
+      "A1" => "X",  "A2" => "O",  "A3" => "X",
+      "B1" => "O",  "B2" => "X",  "B3" => "O",
+      "C1" => "X",  "C2" => "O",  "C3" => "X"
+    }
+    assert_equal(expected, actual)
+  end
   def test_seqai_fill_board_1
     game = Game.new
     9.times do
@@ -557,7 +547,7 @@ class TicTacToe_Test < Minitest::Test
     }
     assert_equal(expected, actual)
   end
-  def test_seqai_fill_board_1
+  def test_seqai_fill_board_2
     game = Game.new
     9.times do
       SequentialAI.new.make_move(game, "X")
