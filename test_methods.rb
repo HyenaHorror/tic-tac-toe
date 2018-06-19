@@ -1,6 +1,7 @@
 require "minitest/autorun"
 require_relative "board.rb"
 require_relative "random_ai.rb"
+require_relative "game.rb"
 
 class TicTacToe_Test < Minitest::Test
   def test_bool
@@ -175,5 +176,18 @@ class TicTacToe_Test < Minitest::Test
     b = position[1].to_i >= 1 && position[1].to_i <= 3
     actual = a && b
     assert_equal(true, actual)
+  end
+
+  def test_game_set_player_x
+    game = Game.new
+    actual = game.set_player("X")
+    expected = "X"
+    assert_equal(expected, actual)
+  end
+  def test_game_set_player_o
+    game = Game.new
+    actual = game.set_player("o")
+    expected = "O"
+    assert_equal(expected, actual)
   end
 end
