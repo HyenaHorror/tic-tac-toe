@@ -9,7 +9,6 @@ class Game
 
   def set_player(params)
     @current_player = params.to_s.upcase
-    # return @current_player
   end
 
   def alt_player
@@ -18,5 +17,13 @@ class Game
     else
       @current_player = "X"
     end
+  end
+
+  def make_move(player=@current_player, position)
+    @board.make_move(player, position)
+  end
+
+  def return_board
+    @board.return_board
   end
 end

@@ -1,6 +1,7 @@
 require "minitest/autorun"
 require_relative "board.rb"
 require_relative "random_ai.rb"
+require_relative "sequential_ai.rb"
 require_relative "game.rb"
 
 class TicTacToe_Test < Minitest::Test
@@ -478,4 +479,96 @@ class TicTacToe_Test < Minitest::Test
     expected = "X"
     refute_equal(expected, actual)
   end
+
+  # def test_sequential_ai_solo_1
+  #   game = Game.new
+  #   until @valid_move != "Invalid move!"
+  #     @valid_move = SequentialAI.new.make_move(game, "X")
+  #   end
+  #   actual = game.return_board
+  #   expected = {
+  #     "A1" => "X",  "A2" => "X",  "A3" => "X",
+  #     "B1" => "X",  "B2" => "X",  "B3" => "X",
+  #     "C1" => "X",  "C2" => "X",  "C3" => "X"
+  #   }
+  #   assert_equal(expected, actual)
+  # end
+  # def test_sequential_ai_solo_2
+  #   game = Game.new
+  #   until @valid_move != "Invalid move!"
+  #     @valid_move = SequentialAI.new.make_move(game, "O")
+  #   end
+  #   actual = game.return_board
+  #   expected = {
+  #     "A1" => "O",  "A2" => "O",  "A3" => "O",
+  #     "B1" => "O",  "B2" => "O",  "B3" => "O",
+  #     "C1" => "O",  "C2" => "O",  "C3" => "O"
+  #   }
+  #   assert_equal(expected, actual)
+  # end
+
+  def test_seqai_one_turn
+    game = Game.new
+    SequentialAI.new.make_move(game, "O")
+    actual = game.return_board
+    expected = {
+      "A1" => "O",  "A2" => " ",  "A3" => " ",
+      "B1" => " ",  "B2" => " ",  "B3" => " ",
+      "C1" => " ",  "C2" => " ",  "C3" => " "
+    }
+    assert_equal(expected, actual)
+  end
+  def test_seqai_one_turn2
+    game = Game.new
+    game.make_move("X", "A1")
+    SequentialAI.new.make_move(game, "O")
+    actual = game.return_board
+    expected = {
+      "A1" => "X",  "A2" => "O",  "A3" => " ",
+      "B1" => " ",  "B2" => " ",  "B3" => " ",
+      "C1" => " ",  "C2" => " ",  "C3" => " "
+    }
+    assert_equal(expected, actual)
+  end
+  def test_seqai_one_at_a_time
+    game = Game.new
+    game.make_move("X", "A1")
+    SequentialAI.new.make_move(game, "O")
+    game.make_move("X", "A3")
+    SequentialAI.new.make_move(game, "O")
+    actual = game.return_board
+    expected = {
+      "A1" => "X",  "A2" => "O",  "A3" => "X",
+      "B1" => "O",  "B2" => " ",  "B3" => " ",
+      "C1" => " ",  "C2" => " ",  "C3" => " "
+    }
+    assert_equal(expected, actual)
+  end
+  def test_seqai_fill_board_1
+    game = Game.new
+    9.times do
+      SequentialAI.new.make_move(game, "O")
+    end
+    actual = game.return_board
+    expected = {
+      "A1" => "O",  "A2" => "O",  "A3" => "O",
+      "B1" => "O",  "B2" => "O",  "B3" => "O",
+      "C1" => "O",  "C2" => "O",  "C3" => "O"
+    }
+    assert_equal(expected, actual)
+  end
+  def test_seqai_fill_board_1
+    game = Game.new
+    9.times do
+      SequentialAI.new.make_move(game, "X")
+    end
+    actual = game.return_board
+    expected = {
+      "A1" => "X",  "A2" => "X",  "A3" => "X",
+      "B1" => "X",  "B2" => "X",  "B3" => "X",
+      "C1" => "X",  "C2" => "X",  "C3" => "X"
+    }
+    assert_equal(expected, actual)
+  end
+
 end
