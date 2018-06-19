@@ -190,4 +190,18 @@ class TicTacToe_Test < Minitest::Test
     expected = "O"
     assert_equal(expected, actual)
   end
+
+  def test_alternate_player_o_from_x
+    game = Game.new
+    actual = game.alt_player
+    expected = "O"
+    assert_equal(expected, actual)
+  end
+  def test_alternate_player_x_from_o
+    game = Game.new
+    game.set_player("O")
+    actual = game.alt_player
+    expected = "X"
+    assert_equal(expected, actual)
+  end
 end

@@ -12,4 +12,11 @@ class Game
     # return @current_player
   end
 
+  def alt_player
+    if @current_player == "X"
+      @current_player = "O"
+    else
+      @current_player = "X"
+    end
+  end
 end
