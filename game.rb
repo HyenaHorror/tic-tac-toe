@@ -1,5 +1,6 @@
 require_relative 'board.rb'
 require_relative 'random_ai.rb'
+require_relative 'sequential_ai.rb'
 require_relative 'player.rb'
 
 class Game
@@ -26,6 +27,7 @@ class Game
 
   def make_move(player=@current_player, position)
     @board.make_move(player, position)
+
   end
 
   def return_board
@@ -64,14 +66,18 @@ class Game
   end
 
   def check_move_type(player)
+    puts "check move type player : #{player.return}"
     type = player.return[:type]
     symbol = player.return[:symbol]
     if type == "HUMAN"
       return type
     elsif type == "RANDOM"
       RandomAI.new.make_move(@board, symbol)
+      alt_player
     elsif type == "SEQUENTIAL"
       SequentialAI.new.make_move(@board, symbol)
+      alt_player
+
     end
   end
 end
