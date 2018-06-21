@@ -3,6 +3,7 @@ require_relative "board.rb"
 require_relative "random_ai.rb"
 require_relative "sequential_ai.rb"
 require_relative "game.rb"
+require_relative "player.rb"
 
 class TicTacToe_Test < Minitest::Test
   def test_bool
@@ -561,4 +562,17 @@ class TicTacToe_Test < Minitest::Test
     assert_equal(expected, actual)
   end
 
+  def test_player_init
+    actual = Player.new.return
+    expected = {:type => "HUMAN", :symbol => "X"}
+    assert_equal(expected, actual)
+  end
+
+  def test_player_human_o
+    player = Player.new
+    player.set_symbol("o")
+    actual = player.return
+    expected = {:type => "HUMAN", :symbol => "O"}
+    assert_equal(expected, actual)
+  end
 end
