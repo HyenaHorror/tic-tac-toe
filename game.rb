@@ -8,6 +8,8 @@ class Game
     set_player("X")
     @player1 = Player.new
     @player2 = Player.new(2, "O")
+
+    @turn = 1
   end
 
   def set_player(params)
@@ -39,5 +41,37 @@ class Game
     b = a[num - 1]
     b.set_type(type)
     return b.return
+  end
+
+  def human_input(pos)
+    self.make_move(pos)
+
+    if @turn == 1
+      @turn = 2
+    else
+      @turn = 1
+    end
+  end
+
+  def get_next_move
+    if @turn == 1
+      check_move_type(@player1)
+      @turn = 2
+    else
+      check_move_type(@player2)
+      @turn = 1
+    end
+  end
+
+  def check_move_type(player)
+    type = player.return[:type]
+    symbol = player.return[:symbol]
+    if type == "HUMAN"
+      return type
+    elsif type == "RANDOM"
+      RandomAI.new.make_move(@board, symbol)
+    elsif type == "SEQUENTIAL"
+      SequentialAI.new.make_move(@board, symbol)
+    end
   end
 end

@@ -598,4 +598,64 @@ class TicTacToe_Test < Minitest::Test
     expected = {:type => "RANDOM", :order => 2, :symbol => "O"}
     assert_equal(expected, actual)
   end
+
+  def test_get_human_input
+    game = Game.new
+    # game.set_player_type(1, "RANDOM")
+    is_human = game.get_next_move
+    unless is_human == "HUMAN"
+      game.make_move("A1")
+    end
+    actual = game.return_board
+    expected = {
+      "A1" => "X",  "A2" => " ",  "A3" => " ",
+      "B1" => " ",  "B2" => " ",  "B3" => " ",
+      "C1" => " ",  "C2" => " ",  "C3" => " "
+    }
+    assert_equal(expected, actual)
+  end
+  def test_get_random_input
+    game = Game.new
+    game.set_player_type(1, "RANDOM")
+    game.make_move("O", "A1")
+    game.make_move("O", "A2")
+    game.make_move("O", "A3")
+    game.make_move("O", "B1")
+    game.make_move("O", "B3")
+    game.make_move("O", "C1")
+    game.make_move("O", "C2")
+    game.make_move("O", "C3")
+    game.get_next_move
+    actual = game.return_board
+    expected = {
+      "A1" => "O",  "A2" => "O",  "A3" => "O",
+      "B1" => "O",  "B2" => "X",  "B3" => "O",
+      "C1" => "O",  "C2" => "O",  "C3" => "O"
+    }
+    assert_equal(expected, actual)
+  end
+  def test_get_seqai_input
+    game = Game.new
+    game.set_player_type(1, "SEQUENTIAL")
+    game.get_next_move
+    actual = game.return_board
+    expected = {
+      "A1" => "X",  "A2" => " ",  "A3" => " ",
+      "B1" => " ",  "B2" => " ",  "B3" => " ",
+      "C1" => " ",  "C2" => " ",  "C3" => " "
+    }
+    assert_equal(expected, actual)
+  end
+  def test_get_seqai_input_fail
+    game = Game.new
+    game.set_player_type(1, "SEQUENTIAL")
+    game.get_next_move
+    actual = game.return_board
+    expected = {
+      "A1" => "O",  "A2" => " ",  "A3" => " ",
+      "B1" => " ",  "B2" => " ",  "B3" => " ",
+      "C1" => " ",  "C2" => " ",  "C3" => " "
+    }
+    refute_equal(expected, actual)
+  end
 end
