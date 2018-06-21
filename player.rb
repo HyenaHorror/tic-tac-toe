@@ -1,7 +1,8 @@
 class Player
-  def initialize
-    @type = "HUMAN"
-    @symbol = "X"
+  def initialize(order=1, type="HUMAN", symbol="X") #default to first player human X
+    @type = type.upcase
+    @order = order
+    self.set_symbol(symbol)
   end
 
   def set_symbol(params)
@@ -9,6 +10,6 @@ class Player
   end
 
   def return
-    return {:type => @type, :symbol => @symbol}
+    return {:order => @order, :type => @type, :symbol => @symbol}
   end
 end

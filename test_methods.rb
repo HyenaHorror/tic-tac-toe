@@ -564,7 +564,7 @@ class TicTacToe_Test < Minitest::Test
 
   def test_player_init
     actual = Player.new.return
-    expected = {:type => "HUMAN", :symbol => "X"}
+    expected = {:order => 1, :type => "HUMAN", :symbol => "X"}
     assert_equal(expected, actual)
   end
 
@@ -572,7 +572,14 @@ class TicTacToe_Test < Minitest::Test
     player = Player.new
     player.set_symbol("o")
     actual = player.return
-    expected = {:type => "HUMAN", :symbol => "O"}
+    expected = {:order => 1, :type => "HUMAN", :symbol => "O"}
+    assert_equal(expected, actual)
+  end
+
+  def test_player_2_init
+    player = Player.new(2, "human", "o")
+    actual = player.return
+    expected = {:order => 2, :type => "HUMAN", :symbol => "O"}
     assert_equal(expected, actual)
   end
 end
