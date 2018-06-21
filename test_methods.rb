@@ -577,9 +577,25 @@ class TicTacToe_Test < Minitest::Test
   end
 
   def test_player_2_init
-    player = Player.new(2, "human", "o")
+    player = Player.new(2, "o", "human")
     actual = player.return
     expected = {:order => 2, :type => "HUMAN", :symbol => "O"}
+    assert_equal(expected, actual)
+  end
+
+  def test_game_check_players
+    game = Game.new
+    actual = game.return_players
+    expected = [{:type => "HUMAN", :order => 1, :symbol => "X"},
+      {:type => "HUMAN", :order => 2, :symbol => "O"}]
+    assert_equal(expected, actual)
+  end
+
+  def test_set_player2_ai
+    game = Game.new
+    game.set_player_type(2, "RANDOM")
+    actual = game.return_players[1]
+    expected = {:type => "RANDOM", :order => 2, :symbol => "O"}
     assert_equal(expected, actual)
   end
 end
