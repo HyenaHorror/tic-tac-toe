@@ -17,6 +17,10 @@ class Game
     @current_player = params.to_s.upcase
   end
 
+  def return_current_player
+    return @current_player.to_s
+  end
+
   def alt_player
     if @current_player == "X"
       @current_player = "O"

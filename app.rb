@@ -19,14 +19,14 @@ end
 
 get '/game' do
   puts session[:game].return_board
-  erb :game, locals:{board:session[:game].return_board, size:3}
+  erb :game, locals:{board:session[:game].return_board, size:3, player:session[:game].return_current_player}
 end
 
 post '/make_move' do
-  session[:game].make_move(session[:current_player], params[:pos])
+  session[:game].make_move(session[:game].return_current_player, params[:pos])
   # session[:game].check_win
-  # session[:game].alt_player needs to be Game class
-  
+  session[:game].alt_player
+
   redirect '/game'
 end
 get '/make_move2' do
