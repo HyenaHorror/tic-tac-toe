@@ -2,19 +2,41 @@
 <center>
 <table class="game">
   <tr class="top">
-    <td class="left"><a href="#">X</a></td>
-    <td class="middle"><a href="#">O</a></td>
-    <td class="right"><a href="#">O</a></td>
+    <td class="left"><a href="/make_move2?pos=B2">X</a></td>
+    <td class="middle"><a href="/make_move2?pos=B2">O</a></td>
+    <td class="right"><a href="/make_move2?pos=B2">O</a></td>
   </tr>
   <tr class="mid">
-    <td class="left"><a href="#">X</a></td>
-    <td class="middle"><a href="#">X</a></td>
-    <td class="right"><a href="#">O</a></td>
+    <td class="left"><a href="/make_move2?pos=B2">X</a></td>
+    <td class="middle"><a href="/make_move2?pos=B2">X</a></td>
+    <td class="right"><a href="/make_move2?pos=B2">O</a></td>
   </tr>
   <tr class="bot">
-    <td class="left"><a href="#">O</a></td>
-    <td class="middle"><a href="#">O</a></td>
-    <td class="right"><a href="#">X</a></td>
+    <td class="left"><a href="/make_move2?pos=B2">O</a></td>
+    <td class="middle"><a href="/make_move2?pos=B2">O</a></td>
+    <td class="right"><a href="/make_move2?pos=B2">X</a></td>
   </tr>
+
 </table>
+
+<% counter = 1 %>
+<form class="" action="/make_move" method="post">
+  <table>
+    <% board.each do |x| %>
+      <% if counter == 1 %>
+        <tr>
+      <% end %>
+      <td>
+        <input type="radio" name="pos" <% unless x[1] == " " %>disabled<% end %> value="<%= x[0] %>">
+        <%= x[1] %>
+      </td>
+      <% if counter % size == 0 %>
+        </tr>
+      <% end %>
+      <% counter += 1%>
+    <% end %>
+  </table>
+  <input type="submit">
+</form>
+
 </center>
