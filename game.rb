@@ -84,4 +84,8 @@ class Game
 
     end
   end
+
+  def check_win
+    return @board.check_win
+  end
 end
