@@ -74,6 +74,7 @@ class Game
   end
 
   def check_move_type(player)
+    # puts "check move type player : #{player.return}"
     type = player.return[:type]
     symbol = player.return[:symbol]
     if type == "HUMAN"
