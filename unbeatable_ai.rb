@@ -2,7 +2,6 @@ class UnbeatableAI
   def make_move(board, player_piece)
     columns = ["A", "B", "C"]
     rows = ["1", "2", "3"]
-
     # win
     # if self has two in a row, take third to win
     #horizontal
@@ -13,15 +12,28 @@ class UnbeatableAI
         check << board["#{c}#{r}"]
         position << "#{c}#{r}"
       end
-      # puts "check row #{c}: #{check}"
-      # puts "win? #{check.count(player_piece) == 2}"
-      winning_position = position[check.index(" ")]
-
-      win = check.count(player_piece) == 2
-      if win == true
-        return winning_position
-      end
+        pos = check.index(" ")
+        winning_position = position[check.index(" ").to_i]
+        win = check.count(player_piece) == 2
+        if win == true
+          return winning_position
+        end
     end
+    #vertical
+    rows.each do |r|
+      check = Array.new
+      position = Array.new
+      columns.each do |c|
+        check << board["#{c}#{r}"]
+        position << "#{c}#{r}"
+    end
+    winning_position = position[check.index(" ").to_i]
+
+    win = check.count(player_piece) == 2
+    if win == true
+      return winning_position
+    end
+  end
 
     # block
     # If opponent has two in a row block their win
