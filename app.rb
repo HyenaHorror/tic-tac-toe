@@ -42,7 +42,6 @@ rescue
 end
 
 get '/end' do
-  session[:game].alt_player
   erb :winner, locals:{board:session[:game].return_board,size:3,winner:session[:game].return_current_player}
 rescue
   redirect '/'
@@ -65,6 +64,7 @@ post '/make_move' do # for human players
   end
 
   if session[:game].check_win == true
+    session[:game].alt_player
     redirect '/end'
   elsif session[:current_player] == 'human'
     redirect '/game'
@@ -97,6 +97,7 @@ get '/ai_move' do
     session[:current_turn] = 2
   end
   if session[:game].check_win == true
+    session[:game].alt_player
     redirect '/end'
   else
     redirect '/game'
