@@ -21,6 +21,8 @@ post '/game_settings' do
   case player2
   when 'random'
     session[:player2] = RandomAI.new
+  when 'sequential'
+    session[:player2] = SequentialAI.new
   end
 
 
@@ -79,11 +81,11 @@ get '/ai_move' do
   type = session[:current_player]
   puts "type: #{type}"
   case type
-  when 'random'
-    move = session[:player2].make_move(session[:game], session[:game].return_current_player)
+  when 'random', 'sequential'
+    session[:player2].make_move(session[:game], session[:game].return_current_player)
     # session[:game].make_move(session[:game].return_current_player, params[:pos])
-  when 'sequential'
-    # do sequential
+  # when 'sequential'
+  #   session[:player2].make_move(session[:game], session[:game].return_current_player)
   when 'unbeatable'
     # do unbeatable
   end
