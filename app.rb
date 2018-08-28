@@ -34,13 +34,20 @@ get '/game' do
   puts session[:game].return_board
   puts "Check win: #{session[:game].check_win}"
   if session[:game].check_win == true
-    #end game and return current player as winner
-    # erb :winner, locals:{winner:session[:current_piece]}
+    redirect '/end'
   else
     erb :game, locals:{board:session[:game].return_board, size:3, player:session[:game].return_current_player}
   end
 rescue
   redirect '/'
+end
+
+get '/end' do
+  session[:game].alt_player
+  erb :game, locals:{board:session[:game].return_board, size:3, player:session[:game].return_current_player}
+  erb :winner, locals:{board:session[:game].return_board,size:3,winner:session[:current_piece]}
+# rescue
+#   redirect '/'
 end
 
 post '/make_move' do # for human players
