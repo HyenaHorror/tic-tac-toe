@@ -28,7 +28,6 @@ Current player: <%= player%>
 <% counter = 1 %>
 <form class="" action="/make_move" method="post">
   <table>
-    <%= board %>
     <% board.each do |x| %>
       <% if counter == 1 %>
         <tr>
