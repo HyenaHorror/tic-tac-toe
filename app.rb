@@ -12,15 +12,21 @@ end
 post '/game_settings' do
   session[:game] = Game.new
   # session[:game] = Board.new
-  session[:player1] = params[:player1]
-  session[:player2] = params[:player2]
+  puts params[:player2]
+  player2 = params[:player2]
+
+  session[:player1_type] = params[:player1]
+  session[:player2_type] = player2
+
+  case player2
+  when 'random'
+    session[:player2] = RandomAI.new
+  end
+
+
   session[:current_piece] = "x"
   session[:current_turn] = 1
-  session[:current_player] = session[:player1]
-
-  puts "P1: #{params[:player1]}\nP2: #{params[:player2]}"
-  puts "P1: #{params[:player1].class}\nP2: #{params[:player2].class}"
-
+  session[:current_player] = session[:player1_type]
   redirect '/game'
 end
 
@@ -38,35 +44,51 @@ rescue
 end
 
 post '/make_move' do # for human players
-  unless session[:current_player] = "human"
-    redirect '/ai_move'
-  end
+  puts "params: #{params}"
   # session[:game].check_win
 
-  type = session[:current_player]
-
-  case type
-  when 'human'
     session[:game].make_move(session[:game].return_current_player, params[:pos])
-  when 'random_ai'
-    session[:game].make_move(session[:game].return_current_player, params[:pos])
-  when 'sequential_ai'
-    # do sequential
-  when 'unbeatable'
-    # do unbeatable
-  end
 
   session[:game].alt_player
 
-  if session[:current_turn] = 2
-    session[:current_player] = session[:player1]
+  if session[:current_turn] == 2
+    session[:current_player] = session[:player1_type]
+    session[:current_turn] = 1
   else
-    session[:current_player] = session[:player2]
+    session[:current_player] = session[:player2_type]
+    session[:current_turn] = 2
   end
 
   if session[:current_player] == 'human'
     redirect '/game'
   else
-    redirect '/make_move'
+    redirect '/ai_move'
   end
+rescue
+  redirect '/'
+end
+
+get '/ai_move' do
+  type = session[:current_player]
+  puts "type: #{type}"
+  case type
+  when 'random'
+    move = session[:player2].make_move(session[:game], session[:game].return_current_player)
+    # session[:game].make_move(session[:game].return_current_player, params[:pos])
+  when 'sequential'
+    # do sequential
+  when 'unbeatable'
+    # do unbeatable
+  end
+  session[:game].alt_player
+
+  if session[:current_turn] == 2
+    session[:current_player] = session[:player1_type]
+    session[:current_turn] = 1
+  else
+    session[:current_player] = session[:player2_type]
+    session[:current_turn] = 2
+  end
+
+  redirect '/game'
 end
