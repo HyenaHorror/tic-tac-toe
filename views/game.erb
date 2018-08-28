@@ -18,17 +18,30 @@
   </tr>
 
 </table> -->
+<style media="screen">
+  .cell {
+    width: 75px;
+    height: 75px;
+  }
+</style>
 Current player: <%= player%>
 <% counter = 1 %>
 <form class="" action="/make_move" method="post">
   <table>
+    <%= board %>
     <% board.each do |x| %>
       <% if counter == 1 %>
         <tr>
       <% end %>
-      <td>
-        <input type="radio" name="pos" <% unless x[1] == " " %>disabled<% end %> value="<%= x[0] %>">
-        <%= x[1] %>
+      <td class=cell>
+        <!-- <input type="radio" name="pos" <% unless x[1] == " " %>disabled<% end %> value="<%= x[0] %>"> -->
+        <% if x[1] == " " %>
+          <button class="cell" name="pos" type="submit" formmethod="post" value="<%=x[0]%>">
+            <%=x[1]%>
+          </button>
+        <% else %>
+          <%=x[1]%>
+        <% end %>
       </td>
       <% if counter % size == 0 %>
         </tr>
@@ -36,7 +49,6 @@ Current player: <%= player%>
       <% counter += 1%>
     <% end %>
   </table>
-  <input type="submit">
 </form>
 
 </center>
