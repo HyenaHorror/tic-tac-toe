@@ -30,8 +30,12 @@ class Game
   end
 
   def make_move(player=@current_player, position)
-    @board.make_move(player, position)
-
+    pos = @board.return_board[position]
+    if pos == " "
+      @board.make_move(player, position)
+    else
+      return "Invalid move!"
+    end
   end
 
   def return_board
@@ -70,7 +74,6 @@ class Game
   end
 
   def check_move_type(player)
-    puts "check move type player : #{player.return}"
     type = player.return[:type]
     symbol = player.return[:symbol]
     if type == "HUMAN"
