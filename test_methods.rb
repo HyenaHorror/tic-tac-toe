@@ -896,4 +896,148 @@ class TicTacToe_Test < Minitest::Test
   def test_string_prev_3_fail
     refute_equal("Z", "Z".prev)
   end
+  def test_unbeatable_take_win_diagonal_1
+    game = Game.new
+    game.alt_player
+    game.make_move("X", "A1")
+    game.make_move("X", "C3")
+    game.make_move("X", "B3")
+    game.make_move("O", "A3")
+    game.make_move("O", "C1")
+    move = UnbeatableAI.new.make_move(game.return_board, "O")
+    game.make_move(move)
+    actual = game.return_board
+    expected = {
+      "A1" => "X",  "A2" => " ",  "A3" => "O",
+      "B1" => " ",  "B2" => "O",  "B3" => "X",
+      "C1" => "O",  "C2" => " ",  "C3" => "X"
+    }
+    assert_equal(expected, actual)
+  end
+  def test_unbeatable_take_win_diagonal_2
+    game = Game.new
+    game.alt_player
+    game.make_move("X", "A3")
+    game.make_move("X", "B3")
+    game.make_move("X", "C2")
+    game.make_move("O", "A1")
+    game.make_move("O", "B2")
+    move = UnbeatableAI.new.make_move(game.return_board, "O")
+    game.make_move(move)
+    actual = game.return_board
+    expected = {
+      "A1" => "O",  "A2" => " ",  "A3" => "X",
+      "B1" => " ",  "B2" => "O",  "B3" => "X",
+      "C1" => " ",  "C2" => "X",  "C3" => "O"
+    }
+    assert_equal(expected, actual)
+  end
+  def test_unbeatable_take_win_diagonal_3
+    game = Game.new
+    game.alt_player
+    game.make_move("X", "A2")
+    game.make_move("X", "B1")
+    game.make_move("X", "C2")
+    game.make_move("O", "C3")
+    game.make_move("O", "B2")
+    move = UnbeatableAI.new.make_move(game.return_board, "O")
+    game.make_move(move)
+    actual = game.return_board
+    expected = {
+      "A1" => "O",  "A2" => "X",  "A3" => " ",
+      "B1" => "X",  "B2" => "O",  "B3" => " ",
+      "C1" => " ",  "C2" => "X",  "C3" => "O"
+    }
+    assert_equal(expected, actual)
+  end
+  def test_unbeatable_take_win_diagonal_4
+    game = Game.new
+    game.alt_player
+    game.make_move("X", "B1")
+    game.make_move("X", "C2")
+    game.make_move("X", "C3")
+    game.make_move("O", "C1")
+    game.make_move("O", "B2")
+    move = UnbeatableAI.new.make_move(game.return_board, "O")
+    game.make_move(move)
+    actual = game.return_board
+    expected = {
+      "A1" => " ",  "A2" => " ",  "A3" => "O",
+      "B1" => "X",  "B2" => "O",  "B3" => " ",
+      "C1" => "O",  "C2" => "X",  "C3" => "X"
+    }
+    assert_equal(expected, actual)
+  end
+  def test_unbeatable_take_win_diagonal_1_fail
+    game = Game.new
+    game.alt_player
+    game.make_move("X", "A1")
+    game.make_move("X", "C3")
+    game.make_move("X", "B3")
+    game.make_move("O", "A3")
+    game.make_move("O", "C1")
+    move = UnbeatableAI.new.make_move(game.return_board, "O")
+    game.make_move(move)
+    actual = game.return_board
+    expected = {
+      "A1" => "X",  "A2" => " ",  "A3" => "O",
+      "B1" => " ",  "B2" => " ",  "B3" => "X",
+      "C1" => "O",  "C2" => " ",  "C3" => "X"
+    }
+    refute_equal(expected, actual)
+  end
+  def test_unbeatable_take_win_diagonal_2_fail
+    game = Game.new
+    game.alt_player
+    game.make_move("X", "A3")
+    game.make_move("X", "B3")
+    game.make_move("X", "C2")
+    game.make_move("O", "A1")
+    game.make_move("O", "B2")
+    move = UnbeatableAI.new.make_move(game.return_board, "O")
+    game.make_move(move)
+    actual = game.return_board
+    expected = {
+      "A1" => "O",  "A2" => " ",  "A3" => "X",
+      "B1" => " ",  "B2" => "O",  "B3" => "X",
+      "C1" => " ",  "C2" => "X",  "C3" => " "
+    }
+    refute_equal(expected, actual)
+  end
+  def test_unbeatable_take_win_diagonal_3_fail
+    game = Game.new
+    game.alt_player
+    game.make_move("X", "A2")
+    game.make_move("X", "B1")
+    game.make_move("X", "C2")
+    game.make_move("O", "C3")
+    game.make_move("O", "B2")
+    move = UnbeatableAI.new.make_move(game.return_board, "O")
+    game.make_move(move)
+    actual = game.return_board
+    expected = {
+      "A1" => " ",  "A2" => "X",  "A3" => " ",
+      "B1" => "X",  "B2" => "O",  "B3" => " ",
+      "C1" => " ",  "C2" => "X",  "C3" => "O"
+    }
+    refute_equal(expected, actual)
+  end
+  def test_unbeatable_take_win_diagonal_4_fail
+    game = Game.new
+    game.alt_player
+    game.make_move("X", "B1")
+    game.make_move("X", "C2")
+    game.make_move("X", "C3")
+    game.make_move("O", "C1")
+    game.make_move("O", "B2")
+    move = UnbeatableAI.new.make_move(game.return_board, "O")
+    game.make_move(move)
+    actual = game.return_board
+    expected = {
+      "A1" => " ",  "A2" => " ",  "A3" => " ",
+      "B1" => "X",  "B2" => "O",  "B3" => " ",
+      "C1" => "O",  "C2" => "X",  "C3" => "X"
+    }
+    refute_equal(expected, actual)
+  end
 end

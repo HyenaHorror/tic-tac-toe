@@ -42,6 +42,40 @@ class UnbeatableAI
     if win == true
       return winning_position
     end
+
+    #diagonal
+    forward = Array.new
+    backward = Array.new
+    columns2 = columns.dup
+    rows2 = rows.dup
+    position = Array.new
+    # forward
+    columns.each do |c|
+      r = rows2.shift
+      forward << board["#{c}#{r}"]
+      position << "#{c}#{r}"
+    end
+
+    winning_position = position[forward.index(" ").to_i]
+
+    win = forward.count(player_piece) == 2
+    if win == true
+      return winning_position
+    end
+    position = Array.new
+
+    rows.reverse.each do |r|
+      c = columns2.shift
+      backward << board["#{c}#{r}"]
+      position << "#{c}#{r}"
+    end
+    winning_position = position[backward.index(" ").to_i]
+
+    win = backward.count(player_piece) == 2
+    if win == true
+      return winning_position
+    end
+
   end
 
     # block
