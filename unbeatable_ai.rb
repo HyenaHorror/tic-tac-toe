@@ -4,6 +4,7 @@ class UnbeatableAI
     players = ["X", "O"]
     players.delete(player_piece)
     opponent = players[0]
+    arrays_to_analyze = Array.new
 
     # expandable
     c = "@"
@@ -17,6 +18,8 @@ class UnbeatableAI
 
     # win
     # if self has two in a row, take third to win
+    #block
+    # use with with enemy piece
     #horizontal
     columns.each do |c|
       check = Array.new
@@ -25,12 +28,7 @@ class UnbeatableAI
         check << board["#{c}#{r}"]
         position << "#{c}#{r}"
       end
-        pos = check.index(" ")
-        chosen_pos = position[check.index(" ").to_i]
-        win = check.count(player_piece) == size - 1
-        if win == true
-          return chosen_pos
-        end
+        arrays_to_analyze << {:check => check, :position => position}
     end
     #vertical
     rows.each do |r|
@@ -40,12 +38,8 @@ class UnbeatableAI
         check << board["#{c}#{r}"]
         position << "#{c}#{r}"
     end
-    chosen_pos = position[check.index(" ").to_i]
-
-    win = check.count(player_piece) == size - 1
-    if win == true
-      return chosen_pos
-    end
+    arrays_to_analyze << {:check => check, :position => position}
+  end
 
     #diagonal
     forward = Array.new
@@ -59,28 +53,41 @@ class UnbeatableAI
       forward << board["#{c}#{r}"]
       position << "#{c}#{r}"
     end
-
-    chosen_pos = position[forward.index(" ").to_i]
-
-    win = forward.count(player_piece) == size - 1
-    if win == true
-      return chosen_pos
-    end
+    arrays_to_analyze << {:check => forward, :position => position}
     position = Array.new
-
     rows.reverse.each do |r|
       c = columns2.shift
       backward << board["#{c}#{r}"]
       position << "#{c}#{r}"
     end
-    chosen_pos = position[backward.index(" ").to_i]
+    arrays_to_analyze << {:check => backward, :position => position}
 
-    win = backward.count(player_piece) == size - 1
-    if win == true
-      return chosen_pos
+  win = false
+  block = false
+
+    arrays_to_analyze.each do |array|
+      position = array[:position]
+      check = array[:check]
+      win_pos = position[check.index(" ").to_i]
+      pos = check.index(" ")
+
+      win = check.count(player_piece) == size - 1
+      if win == true
+        return win_pos
+      end
     end
 
-  end
+    arrays_to_analyze.each do |array|
+      position = array[:position]
+      check = array[:check]
+      block_pos = position[check.index(" ").to_i]
+      pos = check.index(" ")
+
+      block = check.count(opponent) == size - 1 && check.count(" ") == 1
+      if block == true
+        return block_pos
+      end
+    end
 
     # block
     # If opponent has two in a row block their win
