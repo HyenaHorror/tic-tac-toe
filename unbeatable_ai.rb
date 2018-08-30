@@ -59,4 +59,13 @@ class UnbeatableAI
 
     # board.make_move(move)
   end
+
+
+end
+
+class String
+  def prev #gets previous letter
+    self[-1] = (self[-1].ord - 1).chr
+    return self
+  end
 end

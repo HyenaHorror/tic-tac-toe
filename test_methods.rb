@@ -878,5 +878,22 @@ class TicTacToe_Test < Minitest::Test
     }
     refute_equal(expected, actual)
   end
-
+  def test_string_prev_1
+    assert_equal("ABCDD", "ABCDE".prev)
+  end
+  def test_string_prev_2
+    assert_equal("TESS", "TEST".prev)
+  end
+  def test_string_prev_3
+    assert_equal("Y", "Z".prev)
+  end
+  def test_string_prev_1_fail
+    refute_equal("ABCDE", "ABCDE".prev)
+  end
+  def test_string_prev_2_fail
+    refute_equal("TEST", "TEST".prev)
+  end
+  def test_string_prev_3_fail
+    refute_equal("Z", "Z".prev)
+  end
 end
