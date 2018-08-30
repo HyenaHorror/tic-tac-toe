@@ -1,7 +1,16 @@
 class UnbeatableAI
   def make_move(board, player_piece)
-    columns = ["A", "B", "C"]
-    rows = ["1", "2", "3"]
+    size = 3
+    # expandable
+    c = "@"
+    r = "0"
+    columns = Array.new
+    rows = Array.new
+    size.times do
+      columns << c.next!.dup
+      rows << r.next!.dup
+    end
+
     # win
     # if self has two in a row, take third to win
     #horizontal
