@@ -23,7 +23,7 @@ class UnbeatableAI
       end
         pos = check.index(" ")
         winning_position = position[check.index(" ").to_i]
-        win = check.count(player_piece) == 2
+        win = check.count(player_piece) == size - 1
         if win == true
           return winning_position
         end
@@ -38,7 +38,7 @@ class UnbeatableAI
     end
     winning_position = position[check.index(" ").to_i]
 
-    win = check.count(player_piece) == 2
+    win = check.count(player_piece) == size - 1
     if win == true
       return winning_position
     end
@@ -58,7 +58,7 @@ class UnbeatableAI
 
     winning_position = position[forward.index(" ").to_i]
 
-    win = forward.count(player_piece) == 2
+    win = forward.count(player_piece) == size - 1
     if win == true
       return winning_position
     end
@@ -71,7 +71,7 @@ class UnbeatableAI
     end
     winning_position = position[backward.index(" ").to_i]
 
-    win = backward.count(player_piece) == 2
+    win = backward.count(player_piece) == size - 1
     if win == true
       return winning_position
     end
