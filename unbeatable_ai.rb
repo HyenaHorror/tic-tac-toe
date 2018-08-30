@@ -22,10 +22,10 @@ class UnbeatableAI
         position << "#{c}#{r}"
       end
         pos = check.index(" ")
-        winning_position = position[check.index(" ").to_i]
+        chosen_pos = position[check.index(" ").to_i]
         win = check.count(player_piece) == size - 1
         if win == true
-          return winning_position
+          return chosen_pos
         end
     end
     #vertical
@@ -36,11 +36,11 @@ class UnbeatableAI
         check << board["#{c}#{r}"]
         position << "#{c}#{r}"
     end
-    winning_position = position[check.index(" ").to_i]
+    chosen_pos = position[check.index(" ").to_i]
 
     win = check.count(player_piece) == size - 1
     if win == true
-      return winning_position
+      return chosen_pos
     end
 
     #diagonal
@@ -56,11 +56,11 @@ class UnbeatableAI
       position << "#{c}#{r}"
     end
 
-    winning_position = position[forward.index(" ").to_i]
+    chosen_pos = position[forward.index(" ").to_i]
 
     win = forward.count(player_piece) == size - 1
     if win == true
-      return winning_position
+      return chosen_pos
     end
     position = Array.new
 
@@ -69,11 +69,11 @@ class UnbeatableAI
       backward << board["#{c}#{r}"]
       position << "#{c}#{r}"
     end
-    winning_position = position[backward.index(" ").to_i]
+    chosen_pos = position[backward.index(" ").to_i]
 
     win = backward.count(player_piece) == size - 1
     if win == true
-      return winning_position
+      return chosen_pos
     end
 
   end
