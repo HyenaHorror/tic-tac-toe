@@ -1,6 +1,10 @@
 class UnbeatableAI
   def make_move(board, player_piece)
     size = 3
+    players = ["X", "O"]
+    players.delete(player_piece)
+    opponent = players[0]
+
     # expandable
     c = "@"
     r = "0"
