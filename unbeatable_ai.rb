@@ -240,6 +240,24 @@ class UnbeatableAI
       :right => right
     }
   end
+
+  def check_fork(array, piece)
+    empty_count = 0
+    take_pos = nil
+    player_count = 0
+
+    array.each do |x|
+      if x[:piece] == " "
+        empty_count += 1
+        take_pos = x[:position]
+      elsif x[:piece] == piece
+        player_count += 1
+      end
+    end
+    if player_count == array.length - 1 && empty_count == 1
+      return take_pos
+    end
+  end
 end
 
 class String

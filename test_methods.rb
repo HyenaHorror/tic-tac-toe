@@ -1637,5 +1637,43 @@ class TicTacToe_Test < Minitest::Test
     }
     assert_equal(expected, actual)
   end
+  def test_check_fork_1
+    array_to_check = [
+      {:position=>"A1", :piece=>"X"},
+      {:position=>"A3", :piece=>" "},
+      {:position=>"B2", :piece=>"X"},
+    ]
+    actual = UnbeatableAI.new.check_fork(array_to_check, "X")
+    expected = "A3"
+    assert_equal(expected, actual)
+  end
+  def test_check_fork_2
+    array_to_check = [
+      {:position=>"B3", :piece=>"X"},
+      {:position=>"C3", :piece=>" "},
+      {:position=>"C2", :piece=>"X"},
+    ]
+    actual = UnbeatableAI.new.check_fork(array_to_check, "X")
+    expected = "C3"
+    assert_equal(expected, actual)
+  end
+  def test_check_fork_nil_1
+    array_to_check = [
+      {:position=>"A1", :piece=>"X"},
+      {:position=>"A3", :piece=>"O"},
+      {:position=>"B2", :piece=>"X"},
+    ]
+    actual = UnbeatableAI.new.check_fork(array_to_check, "X")
+    assert_nil(actual)
+  end
+  def test_check_fork_nil_2
+    array_to_check = [
+      {:position=>"A1", :piece=>"X"},
+      {:position=>"A3", :piece=>" "},
+      {:position=>"B2", :piece=>"O"},
+    ]
+    actual = UnbeatableAI.new.check_fork(array_to_check, "X")
+    assert_nil(actual)
+  end
 
 end
