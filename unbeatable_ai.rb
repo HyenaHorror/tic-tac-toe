@@ -115,6 +115,26 @@ class UnbeatableAI
   end
 
 
+  def find_center(board, size=3)
+    result = Array.new
+    c = "@"
+    r = 1
+    col = Array.new
+    row = Array.new
+    size.times do
+      col << c.next!.dup
+      row << r
+      r += 1
+    end
+    if size % 2 == 1
+      a = (size / 2)
+      pos = "#{col[a]}#{row[a]}"
+      return {
+        :position => pos,
+        :piece => board[pos]
+          }
+    end
+  end
 end
 
 class String

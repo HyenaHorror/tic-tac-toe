@@ -1360,4 +1360,54 @@ class TicTacToe_Test < Minitest::Test
     }
     refute_equal(expected, actual)
   end
+
+  def test_find_center_3x3
+    a = UnbeatableAI.new
+    board = {
+      "A1" => " ",  "A2" => " ",  "A3" => "X",
+      "B1" => " ",  "B2" => "X",  "B3" => "O",
+      "C1" => " ",  "C2" => " ",  "C3" => " "
+    }
+    actual = a.find_center(board, 3)
+    expected = {
+      :position => "B2",
+      :piece => "X"
+    }
+    assert_equal(expected, actual)
+  end
+  def test_find_center_5x5
+    a = UnbeatableAI.new
+    board = {
+      "A1" => " ",  "A2" => " ",  "A3" => "X", "A4" => " ", "A5" => " ",
+      "B1" => " ",  "B2" => "X",  "B3" => "O", "B4" => " ", "B5" => " ",
+      "C1" => " ",  "C2" => " ",  "C3" => " ", "C4" => " ", "C5" => " ",
+      "D1" => " ",  "D2" => " ",  "D3" => " ", "D4" => " ", "D5" => " ",
+      "E1" => " ",  "E2" => " ",  "E3" => " ", "E4" => " ", "E5" => " ",
+    }
+    actual = a.find_center(board, 5)
+    expected = {
+      :position => "C3",
+      :piece => " "
+    }
+    assert_equal(expected, actual)
+  end
+  def test_find_center_7x7
+    a = UnbeatableAI.new
+    board = {
+      "A1" => " ",  "A2" => " ",  "A3" => "X", "A4" => " ", "A5" => " ", "A6" => " ", "A7" => "X",
+      "B1" => " ",  "B2" => "X",  "B3" => "O", "B4" => " ", "B5" => " ", "B6" => " ", "B7" => "X",
+      "C1" => " ",  "C2" => " ",  "C3" => " ", "C4" => "O", "C5" => " ", "C6" => " ", "C7" => "X",
+      "D1" => " ",  "D2" => " ",  "D3" => " ", "D4" => "O", "D5" => " ", "D6" => " ", "D7" => "X",
+      "E1" => " ",  "E2" => " ",  "E3" => " ", "E4" => " ", "E5" => " ", "E6" => " ", "E7" => "X",
+      "F1" => " ",  "F2" => " ",  "F3" => " ", "F4" => " ", "F5" => " ", "F6" => " ", "F7" => "X",
+      "G1" => " ",  "G2" => " ",  "G3" => " ", "G4" => " ", "G5" => " ", "G6" => " ", "G7" => "X",
+    }
+    actual = a.find_center(board, 7)
+    expected = {
+      :position => "D4",
+      :piece => "O"
+    }
+    assert_equal(expected, actual)
+  end
+
 end
