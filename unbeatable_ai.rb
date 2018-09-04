@@ -114,6 +114,43 @@ class UnbeatableAI
     # board.make_move(move)
   end
 
+  def find_corners(board, size=3)
+    result = Array.new
+    c = "@"
+    r = 1
+    col = Array.new
+    row = Array.new
+    size.times do
+      col << c.next!.dup
+      row << r
+      r += 1
+    end
+
+    top_left = "#{col[0]}#{row[0]}"
+    top_right = "#{col[0]}#{row[-1]}"
+    bottom_left = "#{col[-1]}#{row[0]}"
+    bottom_right = "#{col[-1]}#{row[-1]}"
+
+    result = {
+      :top_left => {
+        :position => top_left,
+        :piece => board["#{top_left}"]
+      },
+      :top_right => {
+        :position => top_right,
+        :piece => board["#{top_right}"]
+      },
+      :bottom_left => {
+        :position => bottom_left,
+        :piece => board["#{bottom_left}"]
+      },
+      :bottom_right => {
+        :position => bottom_right,
+        :piece => board["#{bottom_right}"]
+      },
+    }
+    return result
+  end
 
   def find_center(board, size=3)
     result = Array.new
