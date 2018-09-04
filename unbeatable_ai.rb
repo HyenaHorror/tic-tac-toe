@@ -64,14 +64,13 @@ class UnbeatableAI
 
   win = false
   block = false
-
     arrays_to_analyze.each do |array|
       position = array[:position]
       check = array[:check]
       win_pos = position[check.index(" ").to_i]
       pos = check.index(" ")
 
-      win = check.count(player_piece) == size - 1
+      win = check.count(player_piece) == size - 1 && check.count(" ") == 1
       if win == true
         return win_pos
       end
