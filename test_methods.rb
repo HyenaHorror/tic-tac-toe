@@ -1509,19 +1509,19 @@ class TicTacToe_Test < Minitest::Test
     actual = a.find_sides(board, 3)
     expected = {
       :top => [{
-        :pos => "A2",
+        :position => "A2",
         :piece => "X"
       }],
       :bottom => [{
-        :pos => "C2",
+        :position => "C2",
         :piece => " "
       }],
       :left => [{
-        :pos => "B1",
+        :position => "B1",
         :piece => "O"
       }],
       :right => [{
-        :pos => "B3",
+        :position => "B3",
         :piece => "O"
       }]
     }
@@ -1539,35 +1539,35 @@ class TicTacToe_Test < Minitest::Test
     actual = a.find_sides(board, 5)
     expected = {
       :top => [
-        {:pos => "A2",
+        {:position => "A2",
         :piece => " "},
-        {:pos => "A3",
+        {:position => "A3",
         :piece => "X"},
-        {:pos => "A4",
+        {:position => "A4",
         :piece => " "},
     ],
       :bottom => [
-        {:pos => "E2",
+        {:position => "E2",
         :piece => " "},
-        {:pos => "E3",
+        {:position => "E3",
         :piece => " "},
-        {:pos => "E4",
+        {:position => "E4",
         :piece => " "},
       ],
       :left => [
-        {:pos => "B1",
+        {:position => "B1",
         :piece => " "},
-        {:pos => "C1",
+        {:position => "C1",
         :piece => " "},
-        {:pos => "D1",
+        {:position => "D1",
         :piece => " "},
       ],
       :right => [
-        {:pos => "B5",
+        {:position => "B5",
         :piece => "O"},
-        {:pos => "C5",
+        {:position => "C5",
         :piece => "X"},
-        {:pos => "D5",
+        {:position => "D5",
         :piece => "O"},
       ]
     }
@@ -1587,51 +1587,51 @@ class TicTacToe_Test < Minitest::Test
     actual = a.find_sides(board, 7)
     expected = {
       :top => [
-        {:pos => "A2",
+        {:position => "A2",
         :piece => " "},
-        {:pos => "A3",
+        {:position => "A3",
         :piece => "X"},
-        {:pos => "A4",
+        {:position => "A4",
         :piece => " "},
-        {:pos => "A5",
+        {:position => "A5",
         :piece => " "},
-        {:pos => "A6",
+        {:position => "A6",
         :piece => " "},
     ],
       :bottom => [
-        {:pos => "G2",
+        {:position => "G2",
         :piece => " "},
-        {:pos => "G3",
+        {:position => "G3",
         :piece => "X"},
-        {:pos => "G4",
+        {:position => "G4",
         :piece => "O"},
-        {:pos => "G5",
+        {:position => "G5",
         :piece => "X"},
-        {:pos => "G6",
+        {:position => "G6",
         :piece => " "},
       ],
       :left => [
-        {:pos => "B1",
+        {:position => "B1",
         :piece => " "},
-        {:pos => "C1",
+        {:position => "C1",
         :piece => " "},
-        {:pos => "D1",
+        {:position => "D1",
         :piece => " "},
-        {:pos => "E1",
+        {:position => "E1",
         :piece => " "},
-        {:pos => "F1",
+        {:position => "F1",
         :piece => " "},
       ],
       :right => [
-        {:pos => "B7",
+        {:position => "B7",
         :piece => "X"},
-        {:pos => "C7",
+        {:position => "C7",
         :piece => "X"},
-        {:pos => "D7",
+        {:position => "D7",
         :piece => "X"},
-        {:pos => "E7",
+        {:position => "E7",
         :piece => "X"},
-        {:pos => "F7",
+        {:position => "F7",
         :piece => "X"},
       ]
     }

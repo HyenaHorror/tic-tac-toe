@@ -193,7 +193,7 @@ class UnbeatableAI
     row.each do |r|
       pos = "#{col[0]}#{r}"
       top << {
-        :pos => pos,
+        :position => pos,
         :piece => board[pos]
       }
     end
@@ -204,7 +204,7 @@ class UnbeatableAI
     row.each do |r|
       pos = "#{col[-1]}#{r}"
       bottom << {
-        :pos => pos,
+        :position => pos,
         :piece => board[pos]
       }
     end
@@ -215,7 +215,7 @@ class UnbeatableAI
     col.each do |c|
       pos = "#{c}#{row[0]}"
       left << {
-        :pos => pos,
+        :position => pos,
         :piece => board[pos]
       }
     end
@@ -226,7 +226,7 @@ class UnbeatableAI
     col.each do |c|
       pos = "#{c}#{row[-1]}"
       right << {
-        :pos => pos,
+        :position => pos,
         :piece => board[pos]
       }
     end
