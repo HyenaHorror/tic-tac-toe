@@ -1499,5 +1499,143 @@ class TicTacToe_Test < Minitest::Test
     }
     assert_equal(expected, actual)
   end
+  def test_find_sides_3x3
+    a = UnbeatableAI.new
+    board = {
+      "A1" => " ",  "A2" => "X",  "A3" => "X",
+      "B1" => "O",  "B2" => "X",  "B3" => "O",
+      "C1" => " ",  "C2" => " ",  "C3" => " "
+    }
+    actual = a.find_sides(board, 3)
+    expected = {
+      :top => [{
+        :pos => "A2",
+        :piece => "X"
+      }],
+      :bottom => [{
+        :pos => "C2",
+        :piece => " "
+      }],
+      :left => [{
+        :pos => "B1",
+        :piece => "O"
+      }],
+      :right => [{
+        :pos => "B3",
+        :piece => "O"
+      }]
+    }
+    assert_equal(expected, actual)
+  end
+  def test_find_sides_5x5
+    a = UnbeatableAI.new
+    board = {
+      "A1" => "X",  "A2" => " ",  "A3" => "X", "A4" => " ", "A5" => " ",
+      "B1" => " ",  "B2" => "X",  "B3" => "O", "B4" => " ", "B5" => "O",
+      "C1" => " ",  "C2" => " ",  "C3" => " ", "C4" => " ", "C5" => "X",
+      "D1" => " ",  "D2" => " ",  "D3" => " ", "D4" => " ", "D5" => "O",
+      "E1" => "O",  "E2" => " ",  "E3" => " ", "E4" => " ", "E5" => " ",
+    }
+    actual = a.find_sides(board, 5)
+    expected = {
+      :top => [
+        {:pos => "A2",
+        :piece => " "},
+        {:pos => "A3",
+        :piece => "X"},
+        {:pos => "A4",
+        :piece => " "},
+    ],
+      :bottom => [
+        {:pos => "E2",
+        :piece => " "},
+        {:pos => "E3",
+        :piece => " "},
+        {:pos => "E4",
+        :piece => " "},
+      ],
+      :left => [
+        {:pos => "B1",
+        :piece => " "},
+        {:pos => "C1",
+        :piece => " "},
+        {:pos => "D1",
+        :piece => " "},
+      ],
+      :right => [
+        {:pos => "B5",
+        :piece => "O"},
+        {:pos => "C5",
+        :piece => "X"},
+        {:pos => "D5",
+        :piece => "O"},
+      ]
+    }
+    assert_equal(expected, actual)
+  end
+  def test_find_sides_7x7
+    a = UnbeatableAI.new
+    board = {
+      "A1" => " ",  "A2" => " ",  "A3" => "X", "A4" => " ", "A5" => " ", "A6" => " ", "A7" => "X",
+      "B1" => " ",  "B2" => "X",  "B3" => "O", "B4" => " ", "B5" => " ", "B6" => " ", "B7" => "X",
+      "C1" => " ",  "C2" => " ",  "C3" => " ", "C4" => "O", "C5" => " ", "C6" => " ", "C7" => "X",
+      "D1" => " ",  "D2" => " ",  "D3" => " ", "D4" => "O", "D5" => " ", "D6" => " ", "D7" => "X",
+      "E1" => " ",  "E2" => " ",  "E3" => " ", "E4" => " ", "E5" => " ", "E6" => " ", "E7" => "X",
+      "F1" => " ",  "F2" => " ",  "F3" => " ", "F4" => " ", "F5" => " ", "F6" => " ", "F7" => "X",
+      "G1" => "O",  "G2" => " ",  "G3" => "X", "G4" => "O", "G5" => "X", "G6" => " ", "G7" => "X",
+    }
+    actual = a.find_sides(board, 7)
+    expected = {
+      :top => [
+        {:pos => "A2",
+        :piece => " "},
+        {:pos => "A3",
+        :piece => "X"},
+        {:pos => "A4",
+        :piece => " "},
+        {:pos => "A5",
+        :piece => " "},
+        {:pos => "A6",
+        :piece => " "},
+    ],
+      :bottom => [
+        {:pos => "G2",
+        :piece => " "},
+        {:pos => "G3",
+        :piece => "X"},
+        {:pos => "G4",
+        :piece => "O"},
+        {:pos => "G5",
+        :piece => "X"},
+        {:pos => "G6",
+        :piece => " "},
+      ],
+      :left => [
+        {:pos => "B1",
+        :piece => " "},
+        {:pos => "C1",
+        :piece => " "},
+        {:pos => "D1",
+        :piece => " "},
+        {:pos => "E1",
+        :piece => " "},
+        {:pos => "F1",
+        :piece => " "},
+      ],
+      :right => [
+        {:pos => "B7",
+        :piece => "X"},
+        {:pos => "C7",
+        :piece => "X"},
+        {:pos => "D7",
+        :piece => "X"},
+        {:pos => "E7",
+        :piece => "X"},
+        {:pos => "F7",
+        :piece => "X"},
+      ]
+    }
+    assert_equal(expected, actual)
+  end
 
 end

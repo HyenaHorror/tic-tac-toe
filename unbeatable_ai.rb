@@ -172,6 +172,74 @@ class UnbeatableAI
           }
     end
   end
+
+  def find_sides(board, size=3)
+    result = Array.new
+    c = "@"
+    r = 1
+    col = Array.new
+    row = Array.new
+    size.times do
+      col << c.next!.dup
+      row << r
+      r += 1
+    end
+    top = Array.new
+    bottom = Array.new
+    left = Array.new
+    right = Array.new
+
+    #top
+    row.each do |r|
+      pos = "#{col[0]}#{r}"
+      top << {
+        :pos => pos,
+        :piece => board[pos]
+      }
+    end
+    top.shift
+    top.pop
+
+    #bottom
+    row.each do |r|
+      pos = "#{col[-1]}#{r}"
+      bottom << {
+        :pos => pos,
+        :piece => board[pos]
+      }
+    end
+    bottom.shift
+    bottom.pop
+
+    #left
+    col.each do |c|
+      pos = "#{c}#{row[0]}"
+      left << {
+        :pos => pos,
+        :piece => board[pos]
+      }
+    end
+    left.shift
+    left.pop
+
+    #right
+    col.each do |c|
+      pos = "#{c}#{row[-1]}"
+      right << {
+        :pos => pos,
+        :piece => board[pos]
+      }
+    end
+    right.shift
+    right.pop
+
+    return {
+      :top => top,
+      :bottom => bottom,
+      :left => left,
+      :right => right
+    }
+  end
 end
 
 class String
