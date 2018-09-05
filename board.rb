@@ -62,4 +62,22 @@ class Board
     end
     available_positions == 0
   end
+
+  def build(size)
+    result = Hash.new
+    c = "@"
+    r = "0"
+    columns = Array.new
+    rows = Array.new
+    size.times do
+      columns << c.next!.dup
+      rows << r.next!.dup
+    end
+    columns.each do |c|
+      rows.each do |r|
+        result.merge!({"#{c}#{r}" => " "})
+      end
+    end
+    return result
+  end
 end
