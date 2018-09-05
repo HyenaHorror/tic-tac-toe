@@ -88,12 +88,16 @@ class UnbeatableAI
       end
     end
 
-    # block
-    # If opponent has two in a row block their win
-
     # fork
     # create an opportunity where self has two
     # opportunities to win
+    corners = find_corners(board)
+    sides = find_sides(board)
+    center = find_center(board)
+    move = fork_function3x3(board, corners, center, sides, player_piece)
+    unless move == nil
+      return move
+    end
 
     # block opponents fork
     #
@@ -240,22 +244,70 @@ class UnbeatableAI
     }
   end
 
-  def check_fork(array, piece)
-    empty_count = 0
-    take_pos = nil
-    player_count = 0
+  def fork_function3x3(board, corners, center, sides, piece)
+    size = 3
+    col = ["A", "B", "C"]
+    row = [1, 2, 3]
+    # triangle
+    # if two corners are taken take center
+    # if center plus one corner take other corner
+    corner_pairs = [
+      [corners[:top_left].clone,#top
+      corners[:top_right].clone],
+      [corners[:bottom_left].clone, #bottom
+      corners[:bottom_right].clone],
+      [corners[:top_left].clone, #left
+      corners[:bottom_left].clone],
+      [corners[:top_right].clone, #right
+      corners[:bottom_right].clone],
+    ]
+    corner_pairs.each do |c|
+      pos_arr = [c[0][:position], c[1][:position], center[:position]]
+      check_arr = [c[0][:piece], c[1][:piece], center[:piece]]
+      check = check_arr.count(piece) == 2 && check_arr.count(" ") == 1
+      if check == true
+        x = check_arr.index(" ")
+        fork_move = pos_arr[x]
+        # puts "fork move is #{fork_move }"
+        return fork_move
+      end
 
-    array.each do |x|
-      if x[:piece] == " "
-        empty_count += 1
-        take_pos = x[:position]
-      elsif x[:piece] == piece
-        player_count += 1
+    end
+    # arrowhead
+    # if two sides taken take corner that intersects them
+    side_pairs = [
+      [sides[:left][0], sides[:top][0], corners[:top_left]],
+      [sides[:right][0], sides[:top][0], corners[:top_right]],
+      [sides[:right][0], sides[:bottom][0], corners[:bottom_right]],
+      [sides[:left][0], sides[:bottom][0], corners[:bottom_left]]
+    ]
+    side_pairs.each do |s|
+      if s[0][:piece][0] == piece && s[1][:piece][0] == piece && s[2][:piece] == " "
+        return s[2][:position]
       end
     end
-    if player_count == array.length - 1 && empty_count == 1
-      return take_pos
+
+    # encirclement
+    # if two opposite corners taken take available corner
+    pair1 = [corners[:top_left], corners[:bottom_right]]
+    pair2 = [corners[:bottom_left], corners[:top_right]]
+
+    pair1.each do |p|
+      if pair2[0][:piece] == piece && pair2[1][:piece] == piece
+        unless p[:piece] != " "
+          return p[:position]
+        end
+      end
     end
+    pair2.each do |p|
+      if pair1[0][:piece] == piece && pair1[1][:piece] == piece
+        unless p[:piece] != " "
+          return p[:position]
+        end
+      end
+    end
+    # if nothing taken, returns nil
+    return nil
   end
 end
 

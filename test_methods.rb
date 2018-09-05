@@ -1637,43 +1637,141 @@ class TicTacToe_Test < Minitest::Test
     }
     assert_equal(expected, actual)
   end
-  def test_check_fork_1
-    array_to_check = [
-      {:position=>"A1", :piece=>"X"},
-      {:position=>"A3", :piece=>" "},
-      {:position=>"B2", :piece=>"X"},
-    ]
-    actual = UnbeatableAI.new.check_fork(array_to_check, "X")
-    expected = "A3"
-    assert_equal(expected, actual)
-  end
-  def test_check_fork_2
-    array_to_check = [
-      {:position=>"B3", :piece=>"X"},
-      {:position=>"C3", :piece=>" "},
-      {:position=>"C2", :piece=>"X"},
-    ]
-    actual = UnbeatableAI.new.check_fork(array_to_check, "X")
-    expected = "C3"
-    assert_equal(expected, actual)
-  end
-  def test_check_fork_nil_1
-    array_to_check = [
-      {:position=>"A1", :piece=>"X"},
-      {:position=>"A3", :piece=>"O"},
-      {:position=>"B2", :piece=>"X"},
-    ]
-    actual = UnbeatableAI.new.check_fork(array_to_check, "X")
-    assert_nil(actual)
-  end
-  def test_check_fork_nil_2
-    array_to_check = [
-      {:position=>"A1", :piece=>"X"},
-      {:position=>"A3", :piece=>" "},
-      {:position=>"B2", :piece=>"O"},
-    ]
-    actual = UnbeatableAI.new.check_fork(array_to_check, "X")
-    assert_nil(actual)
-  end
 
+  def test_fork_triangle_1
+    game = Game.new
+    # game.alt_player
+    game.make_move("X", "A1")
+    game.make_move("X", "A3")
+    game.make_move("O", "B1")
+    game.make_move("O", "A2")
+    move = UnbeatableAI.new.make_move(game.return_board, "X")
+    game.make_move(move)
+    actual = game.return_board
+    expected = {
+      "A1" => "X",  "A2" => "O",  "A3" => "X",
+      "B1" => "O",  "B2" => "X",  "B3" => " ",
+      "C1" => " ",  "C2" => " ",  "C3" => " "
+    }
+    assert_equal(expected, actual)
+  end
+  def test_fork_triangle_2
+    game = Game.new
+    game.alt_player
+    game.make_move("X", "A2")
+    game.make_move("X", "B1")
+    game.make_move("O", "C1")
+    game.make_move("O", "A1")
+    move = UnbeatableAI.new.make_move(game.return_board, "O")
+    game.make_move(move)
+    actual = game.return_board
+    expected = {
+      "A1" => "O",  "A2" => "X",  "A3" => " ",
+      "B1" => "X",  "B2" => "O",  "B3" => " ",
+      "C1" => "O",  "C2" => " ",  "C3" => " "
+    }
+    assert_equal(expected, actual)
+  end
+  def test_fork_arrowhead_1
+    game = Game.new
+    game.alt_player
+    game.make_move("X", "A2")
+    game.make_move("X", "B1")
+    game.make_move("O", "C1")
+    game.make_move("O", "A1")
+    move = UnbeatableAI.new.make_move(game.return_board, "O")
+    game.make_move(move)
+    actual = game.return_board
+    expected = {
+      "A1" => "O",  "A2" => "X",  "A3" => " ",
+      "B1" => "X",  "B2" => "O",  "B3" => " ",
+      "C1" => "O",  "C2" => " ",  "C3" => " "
+    }
+    assert_equal(expected, actual)
+  end
+  # def test_fork_arrowhead_1
+  #   game = Game.new
+  #   game.alt_player
+  #   game.make_move("X", "A2")
+  #   game.make_move("X", "B1")
+  #   game.make_move("O", "C1")
+  #   game.make_move("O", "A1")
+  #   move = UnbeatableAI.new.make_move(game.return_board, "O")
+  #   game.make_move(move)
+  #   actual = game.return_board
+  #   expected = {
+  #     "A1" => "O",  "A2" => "X",  "A3" => " ",
+  #     "B1" => "X",  "B2" => "O",  "B3" => " ",
+  #     "C1" => "O",  "C2" => " ",  "C3" => " "
+  #   }
+  #   assert_equal(expected, actual)
+  # end
+  def test_fork_arrowhead_1
+    game = Game.new
+    game.alt_player
+    game.make_move("X", "A2")
+    game.make_move("X", "B2")
+    game.make_move("O", "C2")
+    game.make_move("O", "B3")
+    move = UnbeatableAI.new.make_move(game.return_board, "O")
+    game.make_move(move)
+    actual = game.return_board
+    expected = {
+      "A1" => " ",  "A2" => "X",  "A3" => " ",
+      "B1" => " ",  "B2" => "X",  "B3" => "O",
+      "C1" => " ",  "C2" => "O",  "C3" => "O"
+    }
+    assert_equal(expected, actual)
+  end
+  def test_fork_arrowhead_2
+    game = Game.new
+    game.alt_player
+    game.make_move("X", "B2")
+    game.make_move("X", "B3")
+    game.make_move("O", "B1")
+    game.make_move("O", "A2")
+    move = UnbeatableAI.new.make_move(game.return_board, "O")
+    game.make_move(move)
+    actual = game.return_board
+    expected = {
+      "A1" => "O",  "A2" => "O",  "A3" => " ",
+      "B1" => "O",  "B2" => "X",  "B3" => "X",
+      "C1" => " ",  "C2" => " ",  "C3" => " "
+    }
+    assert_equal(expected, actual)
+  end
+  def test_fork_encirclement_1
+    game = Game.new
+    game.alt_player
+    game.make_move("X", "C1")
+    game.make_move("X", "B2")
+    game.make_move("O", "C3")
+    game.make_move("O", "A1")
+    move = UnbeatableAI.new.make_move(game.return_board, "O")
+    game.make_move(move)
+    actual = game.return_board
+    expected = {
+      "A1" => "O",  "A2" => " ",  "A3" => "O",
+      "B1" => " ",  "B2" => "X",  "B3" => " ",
+      "C1" => "X",  "C2" => " ",  "C3" => "O"
+    }
+    assert_equal(expected, actual)
+  end
+  def test_fork_encirclement_2
+    game = Game.new
+    game.alt_player
+    game.make_move("X", "B2")
+    # game.make_move("X", "B1")
+    game.make_move("O", "A1")
+    game.make_move("O", "C3")
+    move = UnbeatableAI.new.make_move(game.return_board, "O")
+    game.make_move(move)
+    actual = game.return_board
+    expected = {
+      "A1" => "O",  "A2" => " ",  "A3" => " ",
+      "B1" => " ",  "B2" => "X",  "B3" => " ",
+      "C1" => "O",  "C2" => " ",  "C3" => "O"
+    }
+    assert_equal(expected, actual)
+  end
 end
