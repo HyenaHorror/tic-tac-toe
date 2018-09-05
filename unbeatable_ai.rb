@@ -98,15 +98,19 @@ class UnbeatableAI
     unless move == nil
       return move
     end
-
-    # block opponents fork
-    #
+    #block fork
+    # block opponent's opportunities
+    move = fork_function3x3(board, corners, center, sides, opponent)
+    unless move == nil
+      return move
+    end
 
     # center
     # take center
 
     # opposite corner
-    #
+    # case statment
+    # when this corner is taken by opponent && opposite is not, take it
 
     # empty corner
     #
