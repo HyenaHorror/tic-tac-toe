@@ -1967,4 +1967,45 @@ class TicTacToe_Test < Minitest::Test
     }
     assert_equal(expected, actual)
   end
+  def test_take_empty_side_1
+    game = Game.new
+    game.alt_player
+    game.make_move("X", "A1")
+    game.make_move("O", "A2")
+    game.make_move("X", "A3")
+    game.make_move("X", "B2")
+    game.make_move("O", "B1")
+    game.make_move("X", "C1")
+    game.make_move("O", "C3")
+    move = UnbeatableAI.new.make_move(game.return_board, "O")
+    game.make_move(move)
+    actual = game.return_board
+    expected = {
+      "A1" => "X",  "A2" => "O",  "A3" => "X",
+      "B1" => "O",  "B2" => "X",  "B3" => " ",
+      "C1" => "X",  "C2" => "O",  "C3" => "O"
+    }
+    assert_equal(expected, actual)
+  end
+  def test_take_empty_side_2
+    game = Game.new
+    game.alt_player
+    game.make_move("X", "A1")
+    game.make_move("O", "A2")
+    game.make_move("O", "A3")
+    game.make_move("O", "B1")
+    game.make_move("X", "B2")
+    game.make_move("X", "C1")
+    game.make_move("X", "C2")
+    game.make_move("X", "C3")
+    move = UnbeatableAI.new.make_move(game.return_board, "O")
+    game.make_move(move)
+    actual = game.return_board
+    expected = {
+      "A1" => "X",  "A2" => "O",  "A3" => "O",
+      "B1" => "O",  "B2" => "X",  "B3" => "O",
+      "C1" => "X",  "C2" => "X",  "C3" => "X"
+    }
+    assert_equal(expected, actual)
+  end
 end

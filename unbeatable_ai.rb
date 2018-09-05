@@ -132,12 +132,13 @@ class UnbeatableAI
         return c[:position]
       end
     end
-
     # empty side
-    #
-
-    # board.make_move(move)
-
+    # take empty side
+    sides.each_pair do |k, s|
+      if s[0][:piece] == " "
+        return s[0][:position]
+      end
+    end
   end
 
   def find_corners(board, size=3)
