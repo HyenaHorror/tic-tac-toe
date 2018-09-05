@@ -107,6 +107,9 @@ class UnbeatableAI
 
     # center
     # take center
+    if center[:piece] == " "
+      return center[:position]
+    end
 
     # opposite corner
     # case statment
