@@ -126,7 +126,12 @@ class UnbeatableAI
       end
     end
     # empty corner
-    #
+    # take empty corner
+    corners.each_pair do |k, c|
+      if c[:piece] == " "
+        return c[:position]
+      end
+    end
 
     # empty side
     #
