@@ -119,7 +119,7 @@ class UnbeatableAI
     ]
     corner_pairs.each do |pair|
       2.times do
-        if pair[0][:piece] == opponent
+        if pair[0][:piece] == opponent && pair[1][:piece] == " "
           return pair[1][:position]
         end
         pair.reverse!
