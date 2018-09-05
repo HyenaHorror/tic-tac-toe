@@ -1874,6 +1874,65 @@ class TicTacToe_Test < Minitest::Test
       "C1" => " ",  "C2" => " ",  "C3" => " "
     }
     assert_equal(expected, actual)
-
+  end
+  def test_take_opposite_corner_1
+    game = Game.new
+    game.alt_player
+    game.make_move("X", "A1")
+    game.make_move("O", "B2")
+    move = UnbeatableAI.new.make_move(game.return_board, "O")
+    game.make_move(move)
+    actual = game.return_board
+    expected = {
+      "A1" => "X",  "A2" => " ",  "A3" => " ",
+      "B1" => " ",  "B2" => "O",  "B3" => " ",
+      "C1" => " ",  "C2" => " ",  "C3" => "O"
+    }
+    assert_equal(expected, actual)
+  end
+  def test_take_opposite_corner_2
+    game = Game.new
+    game.alt_player
+    game.make_move("X", "A3")
+    game.make_move("O", "B2")
+    move = UnbeatableAI.new.make_move(game.return_board, "O")
+    game.make_move(move)
+    actual = game.return_board
+    expected = {
+      "A1" => " ",  "A2" => " ",  "A3" => "X",
+      "B1" => " ",  "B2" => "O",  "B3" => " ",
+      "C1" => "O",  "C2" => " ",  "C3" => " "
+    }
+    assert_equal(expected, actual)
+  end
+  def test_take_opposite_corner_3
+    game = Game.new
+    game.alt_player
+    game.make_move("X", "C3")
+    game.make_move("O", "B2")
+    move = UnbeatableAI.new.make_move(game.return_board, "O")
+    game.make_move(move)
+    actual = game.return_board
+    expected = {
+      "A1" => "O",  "A2" => " ",  "A3" => " ",
+      "B1" => " ",  "B2" => "O",  "B3" => " ",
+      "C1" => " ",  "C2" => " ",  "C3" => "X"
+    }
+    assert_equal(expected, actual)
+  end
+  def test_take_opposite_corner_2
+    game = Game.new
+    game.alt_player
+    game.make_move("X", "C1")
+    game.make_move("O", "B2")
+    move = UnbeatableAI.new.make_move(game.return_board, "O")
+    game.make_move(move)
+    actual = game.return_board
+    expected = {
+      "A1" => " ",  "A2" => " ",  "A3" => "O",
+      "B1" => " ",  "B2" => "O",  "B3" => " ",
+      "C1" => "X",  "C2" => " ",  "C3" => " "
+    }
+    assert_equal(expected, actual)
   end
 end

@@ -112,9 +112,19 @@ class UnbeatableAI
     end
 
     # opposite corner
-    # case statment
     # when this corner is taken by opponent && opposite is not, take it
-
+    corner_pairs = [
+      [corners[:top_left], corners[:bottom_right]],
+      [corners[:top_right], corners[:bottom_left]]
+    ]
+    corner_pairs.each do |pair|
+      2.times do
+        if pair[0][:piece] == opponent
+          return pair[1][:position]
+        end
+        pair.reverse!
+      end
+    end
     # empty corner
     #
 
@@ -122,6 +132,7 @@ class UnbeatableAI
     #
 
     # board.make_move(move)
+
   end
 
   def find_corners(board, size=3)
