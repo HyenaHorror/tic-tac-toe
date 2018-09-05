@@ -1676,40 +1676,6 @@ class TicTacToe_Test < Minitest::Test
     game = Game.new
     game.alt_player
     game.make_move("X", "A2")
-    game.make_move("X", "B1")
-    game.make_move("O", "C1")
-    game.make_move("O", "A1")
-    move = UnbeatableAI.new.make_move(game.return_board, "O")
-    game.make_move(move)
-    actual = game.return_board
-    expected = {
-      "A1" => "O",  "A2" => "X",  "A3" => " ",
-      "B1" => "X",  "B2" => "O",  "B3" => " ",
-      "C1" => "O",  "C2" => " ",  "C3" => " "
-    }
-    assert_equal(expected, actual)
-  end
-  # def test_fork_arrowhead_1
-  #   game = Game.new
-  #   game.alt_player
-  #   game.make_move("X", "A2")
-  #   game.make_move("X", "B1")
-  #   game.make_move("O", "C1")
-  #   game.make_move("O", "A1")
-  #   move = UnbeatableAI.new.make_move(game.return_board, "O")
-  #   game.make_move(move)
-  #   actual = game.return_board
-  #   expected = {
-  #     "A1" => "O",  "A2" => "X",  "A3" => " ",
-  #     "B1" => "X",  "B2" => "O",  "B3" => " ",
-  #     "C1" => "O",  "C2" => " ",  "C3" => " "
-  #   }
-  #   assert_equal(expected, actual)
-  # end
-  def test_fork_arrowhead_1
-    game = Game.new
-    game.alt_player
-    game.make_move("X", "A2")
     game.make_move("X", "B2")
     game.make_move("O", "C2")
     game.make_move("O", "B3")
