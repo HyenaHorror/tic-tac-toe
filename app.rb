@@ -46,6 +46,11 @@ get '/end' do
 rescue
   redirect '/'
 end
+get '/draw' do
+  erb :draw, locals:{board:session[:game].return_board,size:3}
+rescue
+  redirect '/'
+end
 
 post '/make_move' do # for human players
   puts "params: #{params}"
@@ -66,6 +71,8 @@ post '/make_move' do # for human players
   if session[:game].check_win == true
     session[:game].alt_player
     redirect '/end'
+  elsif session[:game].check_draw == true
+    redirect '/draw'
   elsif session[:current_player] == 'human'
     redirect '/game'
   else

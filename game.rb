@@ -10,7 +10,9 @@ class Game
     @player1 = Player.new
     @player2 = Player.new(2, "O")
 
+    @size = 3
     @turn = 1
+    @total_moves = 0
   end
 
   def set_player(params)
@@ -32,6 +34,7 @@ class Game
   def make_move(player=@current_player, position)
     pos = @board.return_board[position]
     if pos == " "
+      @total_moves += 1
       @board.make_move(player, position)
     else
       return "Invalid move!"
@@ -91,5 +94,8 @@ class Game
 
   def check_win
     return @board.check_win
+  end
+  def check_draw
+    @total_moves == @size * @size
   end
 end

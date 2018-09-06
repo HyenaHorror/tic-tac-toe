@@ -1,0 +1,28 @@
+<style media="screen">
+  .cell {
+    width: 75px;
+    height: 75px;
+  }
+</style>
+<center>
+<% counter = 1 %>
+<table>
+<% board.each do |x| %>
+  <% if counter == 1 %>
+    <tr>
+  <% end %>
+  <td class="cell">
+    <%=x[1]%>
+  </td>
+  <% if counter % size == 0 %>
+    </tr>
+  <% end %>
+  <% counter += 1%>
+<% end %>
+</table>
+
+<h1>Draw!</h1>
+<a href="/">
+  <button type="button">New Game</button>
+</a>
+</center>
