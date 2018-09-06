@@ -98,6 +98,24 @@ class UnbeatableAI
     unless move == nil
       return move
     end
+
+    # block encirclement
+    corner_pairs = [
+      [corners[:top_left], corners[:bottom_right]],
+      [corners[:top_right], corners[:bottom_left]]
+    ]
+
+    corner_pairs.each do |c|
+      if c[0][:piece] == opponent && c[1][:piece] == opponent
+        sides.each do |key, side|
+          puts "side is #{side[0]}"
+          unless side[0][:piece] != " "
+            return side[0][:position]
+          end
+        end
+      end
+    end
+
     #block fork
     # block opponent's opportunities
     move = fork_function3x3(board, corners, center, sides, opponent)
