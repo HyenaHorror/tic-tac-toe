@@ -105,11 +105,6 @@ class UnbeatableAI
       return move
     end
 
-    # center
-    # take center
-    if center[:piece] == " "
-      return center[:position]
-    end
 
     # opposite corner
     # when this corner is taken by opponent && opposite is not, take it
@@ -131,6 +126,11 @@ class UnbeatableAI
       if c[:piece] == " "
         return c[:position]
       end
+    end
+    # center
+    # take center
+    if center[:piece] == " "
+      return center[:position]
     end
     # empty side
     # take empty side
