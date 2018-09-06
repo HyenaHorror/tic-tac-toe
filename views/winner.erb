@@ -1,25 +1,32 @@
-<style media="screen">
-  .cell {
-    width: 75px;
-    height: 75px;
-  }
-</style>
 <center>
 <% counter = 1 %>
-<table>
-<% board.each do |x| %>
-  <% if counter == 1 %>
-    <tr>
-  <% end %>
-  <td class="cell">
-    <%=x[1]%>
-  </td>
-  <% if counter % size == 0 %>
-    </tr>
-  <% end %>
-  <% counter += 1%>
-<% end %>
-</table>
+<% row_classes = [" bottom", " top bottom", " top"] %>
+<% col_classes = [" right", " right left", " left"] %>
+<form class="" action="/make_move" method="post">
+  <table>
+    <% board.each do |x| %>
+      <% if counter == 1 %>
+        <tr>
+      <% end %>
+      <td class="cell<%=row_classes[0]%><%=col_classes[0]%>">
+        <% col_classes.delete_at(0) %>
+        <!-- <input type="radio" name="pos" <% unless x[1] == " " %>disabled<% end %> value="<%= x[0] %>"> -->
+        <% if x[1] == " " %>
+          <button class="cell btn" name="pos" type="submit" formmethod="post" value="<%=x[0]%>">
+            <%=x[1]%>
+          </button>
+        <% else %>
+          <%=x[1]%>
+        <% end %>
+      </td>
+      <% if counter % size == 0 %>
+        </tr>
+        <% row_classes.delete_at(0) %>
+        <% col_classes = [" right", " right left", " left"] %>
+      <% end %>
+      <% counter += 1%>
+    <% end %>
+  </table>
 
 <h1><%=winner%> wins!</h1>
 <a href="/">

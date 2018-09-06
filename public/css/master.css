@@ -6,23 +6,28 @@ td {
   width: 100px;
   height: 100px
 }
-.top td{
+.cell {
+  width: 75px;
+  height: 75px;
+}
+table{
+  border-collapse:collapse;
+}
+.top {
+  border-top: 2px solid black;
+}
+.bottom {
   border-bottom: 2px solid black;
 }
-.mid td{
-  border-top: 2px solid black;
-  border-bottom: 2px solid black;
-}
-.bot td{
-  border-top: 2px solid black;
-}
-.left{
+.right {
   border-right: 2px solid black;
 }
-.middle{
+.left {
   border-left: 2px solid black;
-  border-right: 2px solid black;
 }
-.right{
-  border-left: 2px solid black;
+.btn {
+  opacity:0;
+}
+.btn:hover{
+  opacity: 50;
 }
