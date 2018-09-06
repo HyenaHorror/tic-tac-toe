@@ -2008,7 +2008,7 @@ class TicTacToe_Test < Minitest::Test
     }
     assert_equal(expected, actual)
   end
-
+=begin
   def test_rand_vs_unbeat_rand_first
     unbeatable_wins = 0
     random_wins = 0
@@ -2112,4 +2112,5 @@ class TicTacToe_Test < Minitest::Test
     puts "p1wins is: #{p1wins}"
     assert_equal(0, p1wins + p2wins)
   end
+=end
 end

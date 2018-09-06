@@ -5,19 +5,43 @@
     width: 75px;
     height: 75px;
   }
+  table{
+    border-collapse:collapse;
+  }
+  .top {
+    border-top: 2px solid black;
+  }
+  .bottom {
+    border-bottom: 2px solid black;
+  }
+  .right {
+    border-right: 2px solid black;
+  }
+  .left {
+    border-left: 2px solid black;
+  }
+  .btn {
+    opacity:0;
+  }
+  .btn:hover{
+    opacity: 50;
+  }
 </style>
 Current player: <%= player%>
 <% counter = 1 %>
+<% row_classes = [" bottom", " top bottom", " top"] %>
+<% col_classes = [" right", " right left", " left"] %>
 <form class="" action="/make_move" method="post">
   <table>
     <% board.each do |x| %>
       <% if counter == 1 %>
         <tr>
       <% end %>
-      <td class=cell>
+      <td class="<%=row_classes[0]%><%=col_classes[0]%>">
+        <% col_classes.delete_at(0) %>
         <!-- <input type="radio" name="pos" <% unless x[1] == " " %>disabled<% end %> value="<%= x[0] %>"> -->
         <% if x[1] == " " %>
-          <button class="cell" name="pos" type="submit" formmethod="post" value="<%=x[0]%>">
+          <button class="cell btn" name="pos" type="submit" formmethod="post" value="<%=x[0]%>">
             <%=x[1]%>
           </button>
         <% else %>
@@ -26,6 +50,8 @@ Current player: <%= player%>
       </td>
       <% if counter % size == 0 %>
         </tr>
+        <% row_classes.delete_at(0) %>
+        <% col_classes = [" right", " right left", " left"] %>
       <% end %>
       <% counter += 1%>
     <% end %>
