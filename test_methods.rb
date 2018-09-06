@@ -2008,4 +2008,73 @@ class TicTacToe_Test < Minitest::Test
     }
     assert_equal(expected, actual)
   end
+
+  def test_rand_vs_unbeat_rand_first
+    unbeatable_wins = 0
+    random_wins = 0
+    100000.times do
+      game = Game.new
+      turn = 1
+      complete = false
+
+      until complete == true
+        if turn % 2 == 0
+          move = UnbeatableAI.new.make_move(game.return_board, "O")
+          game.make_move(move)
+        else
+          game.make_move(RandomAI.new.choose_position, "X")
+        end
+        turn += 1
+        win = game.check_win
+        draw = game.check_draw
+        if win == true || draw == true
+          if win == true && game.return_current_player == "X"
+            random_wins += 1
+          elsif win == true && game.return_current_player == "O"
+            unbeatable_wins += 1
+          end
+
+          complete = true
+        end
+        game.alt_player
+      end
+    end
+    puts "random wins is: #{random_wins}"
+    puts "unbeatable_wins is: #{unbeatable_wins}"
+    assert_equal(0, random_wins)
+  end
+  def test_rand_vs_unbeat_unbeat_first
+    unbeatable_wins = 0
+    random_wins = 0
+    100000.times do
+      game = Game.new
+      turn = 1
+      complete = false
+
+      until complete == true
+        if turn % 2 == 0
+          game.make_move(RandomAI.new.choose_position, "O")
+        else
+          move = UnbeatableAI.new.make_move(game.return_board, "X")
+          game.make_move(move)
+        end
+        turn += 1
+        win = game.check_win
+        draw = game.check_draw
+        if win == true || draw == true
+          if win == true && game.return_current_player == "O"
+            random_wins += 1
+          elsif win == true && game.return_current_player == "X"
+            unbeatable_wins += 1
+          end
+
+          complete = true
+        end
+        game.alt_player
+      end
+    end
+    puts "random wins is: #{random_wins}"
+    puts "unbeatable_wins is: #{unbeatable_wins}"
+    assert_equal(0, random_wins)
+  end
 end
