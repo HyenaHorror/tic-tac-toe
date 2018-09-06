@@ -3,6 +3,7 @@ require 'erb'
 require_relative 'game.rb'
 require_relative 'random_ai.rb'
 require_relative 'sequential_ai.rb'
+require_relative 'unbeatable_ai.rb'
 enable :sessions
 
 get '/' do
@@ -23,6 +24,8 @@ post '/game_settings' do
     session[:player2] = RandomAI.new
   when 'sequential'
     session[:player2] = SequentialAI.new
+  when 'unbeatable'
+    session[:player2] = UnbeatableAI.new
   end
 
 
@@ -92,7 +95,8 @@ get '/ai_move' do
   # when 'sequential'
   #   session[:player2].make_move(session[:game], session[:game].return_current_player)
   when 'unbeatable'
-    # do unbeatable
+    move = session[:player2].make_move(session[:game].return_board, session[:game].return_current_player)
+    session[:game].make_move(move)
   end
   session[:game].alt_player
 
