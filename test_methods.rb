@@ -2077,4 +2077,39 @@ class TicTacToe_Test < Minitest::Test
     puts "unbeatable_wins is: #{unbeatable_wins}"
     assert_equal(0, random_wins)
   end
+  def test_unbeat_vs_unbeat
+    p1wins = 0
+    p2wins = 0
+    100000.times do
+      game = Game.new
+      turn = 1
+      complete = false
+
+      until complete == true
+        if turn % 2 == 0
+          move = UnbeatableAI.new.make_move(game.return_board, "O")
+          game.make_move(move)
+        else
+          move = UnbeatableAI.new.make_move(game.return_board, "X")
+          game.make_move(move)
+        end
+        turn += 1
+        win = game.check_win
+        draw = game.check_draw
+        if win == true || draw == true
+          if win == true && game.return_current_player == "O"
+            p2wins += 1
+          elsif win == true && game.return_current_player == "X"
+            p1wins += 1
+          end
+
+          complete = true
+        end
+        game.alt_player
+      end
+    end
+    puts "p2wins is: #{p2wins}"
+    puts "p1wins is: #{p1wins}"
+    assert_equal(0, p1wins + p2wins)
+  end
 end
