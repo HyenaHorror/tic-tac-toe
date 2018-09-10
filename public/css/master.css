@@ -1,3 +1,7 @@
+body {
+  font-family: 'Muli', sans-serif;
+}
+
 td {
   text-align: center;
 }
@@ -24,6 +28,9 @@ table{
 }
 .left {
   border-left: 2px solid black;
+}
+button {
+  font-family: 'Muli', sans-serif;
 }
 .btn {
   opacity:0;
