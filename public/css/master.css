@@ -32,9 +32,28 @@ table{
 button {
   font-family: 'Muli', sans-serif;
 }
+
 .btn {
+  font-size: 18px;
+  color: #000000;
+  background-color: #bbb;
+  border-radius: 5px;
+  border: none;
+  padding: 5px 10px;
+  -webkit-transition-duration: 0.3s; /* Safari */
+  transition-duration: 0.3s;
+  cursor: pointer;
+  border: 2px solid black;
+}
+.btn:hover {
+  /* border: 2px solid orange; */
+  background-color: #FFFFFF;
+  color: teal;
+}
+
+.board-btn {
   opacity:0;
 }
-.btn:hover{
+.board-btn:hover{
   opacity: 50;
 }
