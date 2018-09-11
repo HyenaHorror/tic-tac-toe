@@ -1,6 +1,5 @@
 
 <center>
-Current player: <%= player%>
 <% counter = 1 %>
 <% row_classes = [" bottom", " top bottom", " top"] %>
 <% col_classes = [" right", " right left", " left"] %>
@@ -14,7 +13,7 @@ Current player: <%= player%>
         <% col_classes.delete_at(0) %>
         <!-- <input type="radio" name="pos" <% unless x[1] == " " %>disabled<% end %> value="<%= x[0] %>"> -->
         <% if x[1] == " " %>
-          <button class="cell btn" name="pos" type="submit" formmethod="post" value="<%=x[0]%>">
+          <button class="cell board-btn" name="pos" type="submit" formmethod="post" value="<%=x[0]%>">
             <%=x[1]%>
           </button>
         <% else %>
@@ -30,5 +29,5 @@ Current player: <%= player%>
     <% end %>
   </table>
 </form>
-
+Current player: <%= player%>
 </center>
