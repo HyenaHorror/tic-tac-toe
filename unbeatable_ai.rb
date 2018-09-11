@@ -37,9 +37,9 @@ class UnbeatableAI
       columns.each do |c|
         check << board["#{c}#{r}"]
         position << "#{c}#{r}"
+      end
+      arrays_to_analyze << {:check => check, :position => position}
     end
-    arrays_to_analyze << {:check => check, :position => position}
-  end
 
     #diagonal
     forward = Array.new
@@ -62,8 +62,8 @@ class UnbeatableAI
     end
     arrays_to_analyze << {:check => backward, :position => position}
 
-  win = false
-  block = false
+    win = false
+    block = false
     arrays_to_analyze.each do |array|
       position = array[:position]
       check = array[:check]
