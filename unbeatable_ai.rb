@@ -87,42 +87,53 @@ class UnbeatableAI
         return block_pos
       end
     end
+    
+    if size > 3
+      # poison lines
+      # if opponent has two or more in a row, block it
+      # if diagonal line contains 2 oppoent and no self
+      # poison
+      # if horizonal line contains 2 oppoent and no self
+      # poison
+      # if vertical line contains 2 oppoent and no self
+      # poison
+    else
+      # fork
+      # create an opportunity where self has two
+      # opportunities to win
+      corners = find_corners(board)
+      sides = find_sides(board)
+      center = find_center(board)
+      # move = fork_function(board, corners, center, sides, player_piece)
+      move = fork_function3x3(board, corners, center, sides, player_piece)
+      unless move == nil
+        return move
+      end
 
-    # fork
-    # create an opportunity where self has two
-    # opportunities to win
-    corners = find_corners(board)
-    sides = find_sides(board)
-    center = find_center(board)
-    move = fork_function3x3(board, corners, center, sides, player_piece)
-    unless move == nil
-      return move
-    end
+      # block encirclement
+      corner_pairs = [
+        [corners[:top_left], corners[:bottom_right]],
+        [corners[:top_right], corners[:bottom_left]]
+      ]
 
-    # block encirclement
-    corner_pairs = [
-      [corners[:top_left], corners[:bottom_right]],
-      [corners[:top_right], corners[:bottom_left]]
-    ]
-
-    corner_pairs.each do |c|
-      if c[0][:piece] == opponent && c[1][:piece] == opponent
-        sides.each do |key, side|
-          puts "side is #{side[0]}"
-          unless side[0][:piece] != " "
-            return side[0][:position]
+      corner_pairs.each do |c|
+        if c[0][:piece] == opponent && c[1][:piece] == opponent
+          sides.each do |key, side|
+            puts "side is #{side[0]}"
+            unless side[0][:piece] != " "
+              return side[0][:position]
+            end
           end
         end
       end
-    end
 
-    #block fork
-    # block opponent's opportunities
-    move = fork_function3x3(board, corners, center, sides, opponent)
-    unless move == nil
-      return move
+      #block fork
+      # block opponent's opportunities
+      move = fork_function3x3(board, corners, center, sides, opponent)
+      unless move == nil
+        return move
+      end
     end
-
     # center
     # take center
     if center[:piece] == " "
@@ -288,9 +299,10 @@ class UnbeatableAI
   end
 
   def fork_function3x3(board, corners, center, sides, piece)
+  # def fork_function(board, corners, center, sides, piece, size=3)
     size = 3
-    col = ["A", "B", "C"]
-    row = [1, 2, 3]
+    col = ("A"..("A".ord + (size-1)).chr).to_a
+    row = (1..size).to_a
     # triangle
     # if two corners are taken take center
     # if center plus one corner take other corner
