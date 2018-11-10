@@ -2,12 +2,13 @@ class Board
   # position_list = ["A1", "A2", "A3", "B1", "B2", "B3", "C1", "C2", "C3"]
 
   def initialize(size=3)
-    columns = ("A"..("A".ord + (size-1)).chr).to_a
-    rows = (1..size).to_a
+    @columns = ("A"..("A".ord + (size-1)).chr).to_a
+    @rows = (1..size).to_a
     @current_state = Hash.new
+    @size = size
     
-    rows.each do |r|
-      columns.each do |c|
+    @rows.each do |r|
+      @columns.each do |c|
         @current_state["#{c}#{r}"] = " "
       end
     end
@@ -30,30 +31,84 @@ class Board
   end
 
   def check_win
-    columns = ["A", "B", "C"]
-    rows = ["1", "2", "3"]
+    # columns = ["A", "B", "C"]
+    # rows = ["1", "2", "3"]
     win = false
+    # puts "in check win"
+    # puts @current_state
     #horizontal
-    columns.each do |c|
-      if @current_state["#{c}1"] == @current_state["#{c}2"] && @current_state["#{c}3"] == @current_state["#{c}1"] && @current_state["#{c}1"] != " "
-        win = true
-        return win
+    @columns.each do |c|
+      row_to_check = Array.new
+      counter = 0
+      @size.times do
+        counter += 1
+        row_to_check << @current_state["#{c}#{counter}"]
+      end
+      
+      # if all spaces are the same symbol (except empty) return win
+      if row_to_check.uniq.length == 1
+        unless row_to_check.uniq[0] == " "
+          return true
+        end
       end
     end
     #vertical
-    rows.each do |r|
-      if @current_state["A#{r}"] == @current_state["B#{r}"] && @current_state["C#{r}"] == @current_state["A#{r}"] && @current_state["A#{r}"] != " "
-        win = true
-        return win
+    @rows.each do |r|
+      column_to_check = Array.new
+      column = "@"
+      @size.times do
+        column.next!
+        column_to_check << @current_state["#{column}#{r}"]
+      end
+      
+      # if all spaces are the same symbol (except empty) return win
+      if column_to_check.uniq.length == 1
+        unless column_to_check.uniq[0] == " "
+          return true
+        end
       end
     end
     #diagonal
-    if @current_state["A1"] == @current_state["B2"] && @current_state["C3"] == @current_state["A1"] && @current_state["A1"] != " "
-      win = true
-    elsif @current_state["A3"] == @current_state["B2"] && @current_state["C1"] == @current_state["A3"] && @current_state["A3"] != " "
-      win = true
+    @columns.each do |c|
+      forward_diagonal_to_check = Array.new
+      backward_diagonal_to_check = Array.new
+      row = 0
+      column = "@"
+      @size.times do
+        row += 1
+        column.next!
+        forward_diagonal_to_check << @current_state["#{column}#{row}"]
+      end
+      row = @size.clone
+      column = "@"
+      @size.times do
+        column.next!
+        backward_diagonal_to_check << @current_state["#{column}#{row}"]
+        row -= 1
+      end
+      
+      if forward_diagonal_to_check.uniq.length == 1
+        unless forward_diagonal_to_check.uniq[0] == " "
+          return true
+        end
+      end
+      
+      if backward_diagonal_to_check.uniq.length == 1
+        unless backward_diagonal_to_check.uniq[0] == " "
+          return true
+        end
+      end
+      return win
     end
-    return win
+      
+    
+    # 
+    # if @current_state["A1"] == @current_state["B2"] && @current_state["C3"] == @current_state["A1"] && @current_state["A1"] != " "
+    #   win = true
+    # elsif @current_state["A3"] == @current_state["B2"] && @current_state["C1"] == @current_state["A3"] && @current_state["A3"] != " "
+    #   win = true
+    # end
+    # return win
   end
 
   def check_draw

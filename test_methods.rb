@@ -2137,6 +2137,211 @@ class TicTacToe_Test < Minitest::Test
     }
     actual = Board.new(7).return_board
     assert_equal(expected, actual)
-  
   end
+  
+  
+    def test_horizontal_expandable_win_a
+      b = Board.new(5)
+      b.make_move("X", "A1")
+      b.make_move("X", "A2")
+      b.make_move("X", "A3")
+      b.make_move("X", "A4")
+      b.make_move("X", "A5")
+      b.check_win
+      actual = b.check_win
+      expected = true
+      assert_equal(expected, actual)
+    end
+    def test_horizontal_expandable_win_b
+      b = Board.new(7)
+      b.make_move("O", "B1")
+      b.make_move("O", "B2")
+      b.make_move("O", "B3")
+      b.make_move("O", "B4")
+      b.make_move("O", "B5")
+      b.make_move("O", "B6")
+      b.make_move("O", "B7")
+      b.check_win
+      actual = b.check_win
+      expected = true
+      assert_equal(expected, actual)
+    end
+    def test_horizontal_expandable_win_c
+      b = Board.new
+      b.make_move("X", "C1")
+      b.make_move("X", "C2")
+      b.make_move("X", "C3")
+      b.make_move("X", "C4")
+      b.make_move("X", "C5")
+      b.check_win
+      actual = b.check_win
+      expected = true
+      assert_equal(expected, actual)
+    end
+    def test_horizontal_expandable_fail_a
+      b = Board.new(5)
+      b.make_move("X", "A1")
+      b.make_move("X", "A2")
+      b.make_move("X", "A3")
+      b.make_move("X", "A4")
+      b.make_move(" ", "A5")
+      b.check_win
+      actual = b.check_win
+      expected = false
+      assert_equal(expected, actual)
+    end
+    def test_horizontal_expandable_fail_b
+      b = Board.new(7)
+      b.make_move("O", "B1")
+      b.make_move("X", "B2")
+      b.make_move("O", "B3")
+      b.make_move("O", "B4")
+      b.make_move("O", "B5")
+      b.make_move("O", "B6")
+      b.make_move("O", "B7")
+      b.check_win
+      actual = b.check_win
+      expected = false
+      assert_equal(expected, actual)
+    end
+    def test_horizontal_expandable_fail_c
+      b = Board.new
+      b.make_move("X", "C1")
+      b.make_move("O", "C2")
+      b.make_move("X", "C3")
+      b.make_move("X", "C4")
+      b.make_move("X", "C5")
+      b.check_win
+      actual = b.check_win
+      expected = false
+      assert_equal(expected, actual)
+    end
+    def test_vertical_expandable_win_1
+      b = Board.new(5)
+      b.make_move("X", "A1")
+      b.make_move("X", "B1")
+      b.make_move("X", "C1")
+      b.make_move("X", "D1")
+      b.make_move("X", "E1")
+      b.check_win
+      actual = b.check_win
+      expected = true
+      assert_equal(expected, actual)
+    end
+    def test_vertical_expandable_win_2
+      b = Board.new(5)
+      b.make_move("O", "A2")
+      b.make_move("O", "B2")
+      b.make_move("O", "C2")
+      b.make_move("O", "D2")
+      b.make_move("O", "E2")
+      b.check_win
+      actual = b.check_win
+      expected = true
+      assert_equal(expected, actual)
+    end
+    def test_vertical_expandable_win_3
+      b = Board.new(7)
+      b.make_move("X", "A3")
+      b.make_move("X", "B3")
+      b.make_move("X", "C3")
+      b.make_move("X", "D3")
+      b.make_move("X", "E3")
+      b.make_move("X", "F3")
+      b.make_move("X", "G3")
+      b.check_win
+      actual = b.check_win
+      expected = true
+      assert_equal(expected, actual)
+    end
+    def test_vertical_expandable_fail_1
+      b = Board.new(5)
+      b.make_move("X", "A1")
+      b.make_move(" ", "B1")
+      b.make_move("X", "C1")
+      b.make_move("X", "D1")
+      b.make_move("X", "E1")
+      b.check_win
+      actual = b.check_win
+      expected = false
+      assert_equal(expected, actual)
+    end
+    def test_vertical_expandable_fail_2
+      b = Board.new(5)
+      b.make_move("X", "A2")
+      b.make_move("O", "B2")
+      b.make_move("O", "C2")
+      b.make_move("O", "D2")
+      b.make_move("O", "E2")
+      b.check_win
+      actual = b.check_win
+      expected = false
+      assert_equal(expected, actual)
+    end
+    def test_vertical_expandable_fail_3
+      b = Board.new(7)
+      b.make_move("X", "A3")
+      b.make_move("X", "B3")
+      b.make_move("X", "C3")
+      b.make_move("X", "D3")
+      b.make_move("O", "E3")
+      b.make_move("X", "F3")
+      b.make_move("X", "G3")
+      b.check_win
+      actual = b.check_win
+      expected = false
+      assert_equal(expected, actual)
+    end
+    def test_diagonal_expandable_win_1
+      b = Board.new(5)
+      b.make_move("X", "A1")
+      b.make_move("X", "B2")
+      b.make_move("X", "C3")
+      b.make_move("X", "D4")
+      b.make_move("X", "E5")
+      b.check_win
+      actual = b.check_win
+      expected = true
+      assert_equal(expected, actual)
+    end
+    def test_diagonal_expandable_win_2
+      b = Board.new(7)
+      b.make_move("O", "A1")
+      b.make_move("O", "B2")
+      b.make_move("O", "C3")
+      b.make_move("O", "D4")
+      b.make_move("O", "E5")
+      b.make_move("O", "F6")
+      b.make_move("O", "G7")
+      b.check_win
+      actual = b.check_win
+      expected = true
+      assert_equal(expected, actual)
+    end
+    def test_diagonal_expandable_fail_1
+      b = Board.new(5)
+      b.make_move("X", "A1")
+      b.make_move("O", "B2")
+      b.make_move("X", "C3")
+      b.make_move("O", "D4")
+      b.make_move("X", "E5")
+      b.check_win
+      actual = b.check_win
+      expected = false
+      assert_equal(expected, actual)
+    end
+    def test_diagonal_expandable_fail_2
+      b = Board.new(7)
+      b.make_move("X", "A1")
+      b.make_move("O", "B2")
+      b.make_move("X", "C3")
+      b.make_move("O", "D4")
+      b.make_move("X", "E5")
+      b.make_move("O", "F6")
+      b.make_move("X", "G7")
+      b.check_win
+      actual = b.check_win
+      expected = false
+      assert_equal(expected, actual)
+    end
 end
