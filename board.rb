@@ -112,7 +112,7 @@ class Board
   end
 
   def check_draw
-    available_positions = 9
+    available_positions = @size * @size
 
     @current_state.each do |pos, value|
       if value != " "

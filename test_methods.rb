@@ -2344,4 +2344,37 @@ class TicTacToe_Test < Minitest::Test
       expected = false
       assert_equal(expected, actual)
     end
+    def test_draw_epandable_1
+      b = Board.new(5)
+      b.make_move("X", "A1")
+      b.make_move("O", "A2")
+      b.make_move("X", "A3")
+      b.make_move("O", "A4")
+      b.make_move("X", "A5")
+      b.make_move("X", "B1")
+      b.make_move("O", "B2")
+      b.make_move("X", "B3")
+      b.make_move("O", "B4")
+      b.make_move("X", "B5")
+      b.make_move("O", "C1")
+      b.make_move("X", "C2")
+      b.make_move("O", "C3")
+      b.make_move("X", "C4")
+      b.make_move("O", "C5")
+      b.make_move("X", "D1")
+      b.make_move("O", "D2")
+      b.make_move("X", "D3")
+      b.make_move("O", "D4")
+      b.make_move("O", "D5")
+      b.make_move("O", "E1")
+      b.make_move("X", "E2")
+      b.make_move("O", "E3")
+      b.make_move("X", "E4")
+      b.make_move("O", "E5")
+      
+      actual = b.check_draw
+      
+      expected = true
+      assert_equal(expected, actual)
+    end
 end
