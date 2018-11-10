@@ -1,12 +1,16 @@
 class Board
   # position_list = ["A1", "A2", "A3", "B1", "B2", "B3", "C1", "C2", "C3"]
 
-  def initialize
-    @current_state = {
-      "A1" => " ",  "A2" => " ",  "A3" => " ",
-      "B1" => " ",  "B2" => " ",  "B3" => " ",
-      "C1" => " ",  "C2" => " ",  "C3" => " "
-    }
+  def initialize(size=3)
+    columns = ("A"..("A".ord + (size-1)).chr).to_a
+    rows = (1..size).to_a
+    @current_state = Hash.new
+    
+    rows.each do |r|
+      columns.each do |c|
+        @current_state["#{c}#{r}"] = " "
+      end
+    end
   end
 
   def return_board
