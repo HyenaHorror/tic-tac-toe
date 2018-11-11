@@ -11,7 +11,8 @@ get '/' do
 end
 
 post '/game_settings' do
-  session[:game] = Game.new
+  session[:size] = 5
+  session[:game] = Game.new(session[:size])
   # session[:game] = Board.new
   puts params[:player2]
   player2 = params[:player2]
@@ -28,7 +29,6 @@ post '/game_settings' do
     session[:player2] = UnbeatableAI.new
   end
 
-
   session[:current_piece] = "x"
   session[:current_turn] = 1
   session[:current_player] = session[:player1_type]
@@ -39,18 +39,18 @@ get '/game' do
   puts session[:game].return_board
   puts "Check win: #{session[:game].check_win}"
 
-  erb :game, locals:{board:session[:game].return_board, size:3, player:session[:game].return_current_player}
-rescue
-  redirect '/'
+  erb :game, locals:{board:session[:game].return_board, size:session[:size], player:session[:game].return_current_player}
+# rescue
+#   redirect '/'
 end
 
 get '/end' do
-  erb :winner, locals:{board:session[:game].return_board,size:3,winner:session[:game].return_current_player}
+  erb :winner, locals:{board:session[:game].return_board,size:session[:size],winner:session[:game].return_current_player}
 rescue
   redirect '/'
 end
 get '/draw' do
-  erb :draw, locals:{board:session[:game].return_board,size:3}
+  erb :draw, locals:{board:session[:game].return_board,size:session[:size]}
 rescue
   redirect '/'
 end

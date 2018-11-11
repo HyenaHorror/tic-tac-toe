@@ -4,13 +4,13 @@ require_relative 'sequential_ai.rb'
 require_relative 'player.rb'
 
 class Game
-  def initialize
-    @board = Board.new
+  def initialize(size=3)
+    @board = Board.new(size)
     set_player("X")
     @player1 = Player.new
     @player2 = Player.new(2, "O")
 
-    @size = 3
+    @size = size
     @turn = 1
     @total_moves = 0
   end

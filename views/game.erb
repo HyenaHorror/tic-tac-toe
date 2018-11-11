@@ -1,8 +1,15 @@
 
 <center>
 <% counter = 1 %>
-<% row_classes = [" bottom", " top bottom", " top"] %>
-<% col_classes = [" right", " right left", " left"] %>
+<%# row_classes = [" bottom", " top bottom", " top"] %>
+<%# col_classes = [" right", " right left", " left"] %>
+<% row_classes = [" bottom", " top"] %>
+<% col_classes = [" right", " left"] %>
+<% (size-2).times do %>
+  <% row_classes.insert(1, " top bottom") %>
+  <% col_classes.insert(1, " right left") %>
+<% end %>
+<% col_classes_orig = col_classes.clone %>
 <form class="" action="/make_move" method="post">
   <table>
     <% board.each do |x| %>
@@ -23,7 +30,7 @@
       <% if counter % size == 0 %>
         </tr>
         <% row_classes.delete_at(0) %>
-        <% col_classes = [" right", " right left", " left"] %>
+        <% col_classes = col_classes_orig.clone %>
       <% end %>
       <% counter += 1%>
     <% end %>
