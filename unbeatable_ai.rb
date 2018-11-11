@@ -1,20 +1,20 @@
 class UnbeatableAI
-  def make_move(board, player_piece)
-    size = 3
+  def make_move(board, player_piece, size=3)
+    @size = size
     players = ["X", "O"]
     players.delete(player_piece)
     opponent = players[0]
     arrays_to_analyze = Array.new
 
     # expandable
-    c = "@"
-    r = "0"
-    columns = Array.new
-    rows = Array.new
-    size.times do
-      columns << c.next!.dup
-      rows << r.next!.dup
-    end
+    # c = "@"
+    # r = "0"
+    columns = ("A"..("A".ord + (size-1)).chr).to_a
+    rows = (1..size).to_a
+    # size.times do
+    #   columns << c.next!.dup
+    #   rows << r.next!.dup
+    # end
 
     # win
     # if self has two in a row, take third to win
@@ -91,6 +91,10 @@ class UnbeatableAI
     if size > 3
       # poison lines
       # if opponent has two or more in a row, block it
+      corners = find_corners(board, @size)
+      sides = find_sides(board, @size)
+      center = find_center(board, @size)
+      
       # if diagonal line contains 2 oppoent and no self
       # poison
       # if horizonal line contains 2 oppoent and no self
@@ -101,9 +105,9 @@ class UnbeatableAI
       # fork
       # create an opportunity where self has two
       # opportunities to win
-      corners = find_corners(board)
-      sides = find_sides(board)
-      center = find_center(board)
+      corners = find_corners(board, @size)
+      sides = find_sides(board, @size)
+      center = find_center(board, @size)
       # move = fork_function(board, corners, center, sides, player_piece)
       move = fork_function3x3(board, corners, center, sides, player_piece)
       unless move == nil
@@ -119,7 +123,7 @@ class UnbeatableAI
       corner_pairs.each do |c|
         if c[0][:piece] == opponent && c[1][:piece] == opponent
           sides.each do |key, side|
-            puts "side is #{side[0]}"
+            # puts "side is #{side[0]}"
             unless side[0][:piece] != " "
               return side[0][:position]
             end

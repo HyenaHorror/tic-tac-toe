@@ -95,7 +95,7 @@ get '/ai_move' do
   # when 'sequential'
   #   session[:player2].make_move(session[:game], session[:game].return_current_player)
   when 'unbeatable'
-    move = session[:player2].make_move(session[:game].return_board, session[:game].return_current_player)
+    move = session[:player2].make_move(session[:game].return_board, session[:game].return_current_player,session[:size])
     session[:game].make_move(move)
   end
   session[:game].alt_player
