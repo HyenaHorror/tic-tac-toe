@@ -1,5 +1,7 @@
+require_relative 'random_ai.rb'
+
 class UnbeatableAI
-  def make_move(board, player_piece, size=3)
+  def make_move(board, player_piece, size=3, board_class=nil)
     @size = size
     players = ["X", "O"]
     players.delete(player_piece)
@@ -173,6 +175,11 @@ class UnbeatableAI
         return s[0][:position]
       end
     end
+    
+    # random
+    # if nothing else, do random
+    rand = RandomAI.new
+    rand.make_move(board_class, player_piece)
   end
 
   def find_corners(board, size=3)
