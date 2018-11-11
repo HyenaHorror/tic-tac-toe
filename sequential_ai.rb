@@ -1,17 +1,11 @@
 class SequentialAI
   def make_move(board, player_piece)
-    columns = ("A".."C").to_a
-    rows = (1..3).to_a
     valid = "Invalid move!"
-
+    positions = board.return_empty_spaces
+    
     until valid != "Invalid move!"
-      valid = board.make_move(player_piece, "#{columns[0]}#{rows[0]}")
-      if rows.length == 0
-        rows = (1..3).to_a
-        columns.shift
-      else
-        rows.shift
-      end
+      selection = positions.shift
+      valid = board.make_move(player_piece, "#{selection}")
     end
   end
 end

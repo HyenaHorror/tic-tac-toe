@@ -499,8 +499,8 @@ class TicTacToe_Test < Minitest::Test
     SequentialAI.new.make_move(game, "O")
     actual = game.return_board
     expected = {
-      "A1" => "X",  "A2" => "O",  "A3" => " ",
-      "B1" => " ",  "B2" => " ",  "B3" => " ",
+      "A1" => "X",  "A2" => " ",  "A3" => " ",
+      "B1" => "O",  "B2" => " ",  "B3" => " ",
       "C1" => " ",  "C2" => " ",  "C3" => " "
     }
     assert_equal(expected, actual)
@@ -513,9 +513,9 @@ class TicTacToe_Test < Minitest::Test
     SequentialAI.new.make_move(game, "O")
     actual = game.return_board
     expected = {
-      "A1" => "X",  "A2" => "O",  "A3" => "X",
+      "A1" => "X",  "A2" => " ",  "A3" => "X",
       "B1" => "O",  "B2" => " ",  "B3" => " ",
-      "C1" => " ",  "C2" => " ",  "C3" => " "
+      "C1" => "O",  "C2" => " ",  "C3" => " "
     }
     assert_equal(expected, actual)
   end
@@ -2433,5 +2433,25 @@ class TicTacToe_Test < Minitest::Test
       }
       actual = rand.make_move(b, "O")
       refute_equal(expected, actual)
+    end
+    def test_seqai_expandable1
+      game = Game.new(5)
+      game.make_move("X", "A1")
+      SequentialAI.new.make_move(game, "O")
+      game.make_move("X", "A3")
+      SequentialAI.new.make_move(game, "O")
+      game.make_move("X", "C3")
+      SequentialAI.new.make_move(game, "O")
+      game.make_move("X", "B2")
+      SequentialAI.new.make_move(game, "O")
+      actual = game.return_board
+      expected = {
+        "A1" => "X", "A2" => " ", "A3" => "X", "A4" => " ", "A5" => " ",
+        "B1" => "O", "B2" => "X", "B3" => " ", "B4" => " ", "B5" => " ",
+        "C1" => "O", "C2" => " ", "C3" => "X", "C4" => " ", "C5" => " ",
+        "D1" => "O", "D2" => " ", "D3" => " ", "D4" => " ", "D5" => " ",
+        "E1" => "O", "E2" => " ", "E3" => " ", "E4" => " ", "E5" => " ",
+      }
+      assert_equal(expected, actual)
     end
 end
