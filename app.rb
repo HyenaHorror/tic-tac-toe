@@ -11,7 +11,7 @@ get '/' do
 end
 
 post '/game_settings' do
-  session[:size] = 5
+  session[:size] = params[:size].to_i
   session[:game] = Game.new(session[:size])
   # session[:game] = Board.new
   puts params[:player2]
@@ -40,8 +40,8 @@ get '/game' do
   puts "Check win: #{session[:game].check_win}"
 
   erb :game, locals:{board:session[:game].return_board, size:session[:size], player:session[:game].return_current_player}
-# rescue
-#   redirect '/'
+rescue
+  redirect '/'
 end
 
 get '/end' do
