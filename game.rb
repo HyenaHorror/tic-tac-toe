@@ -44,6 +44,10 @@ class Game
   def return_board
     @board.return_board
   end
+  
+  def return_empty_spaces
+    @board.return_empty_spaces
+  end
 
   def return_players
     return [@player1.return, @player2.return]
