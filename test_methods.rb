@@ -2377,4 +2377,38 @@ class TicTacToe_Test < Minitest::Test
       expected = true
       assert_equal(expected, actual)
     end
+    
+    def test_return_empty_spaces_1
+      b = Board.new
+      expected = ["A1", "B1", "C1", "A2", "B2", "C2", "A3", "B3", "C3"]
+      actual = b.return_empty_spaces
+      assert_equal(expected, actual)
+    end  
+    def test_return_empty_spaces_2
+      b = Board.new(5)
+      expected = ["A1", "B1", "C1", "D1", "E1", "A2", "B2", "C2", "D2", "E2", "A3", "B3", "C3", "D3", "E3", "A4", "B4", "C4", "D4", "E4", "A5", "B5", "C5", "D5", "E5"]
+      actual = b.return_empty_spaces
+      assert_equal(expected, actual)
+    end  
+    def test_return_empty_spaces_3
+      b = Board.new
+      b.make_move("X", "A1")
+      b.make_move("O", "B2")
+      b.make_move("X", "B1")
+      expected = ["C1", "A2", "C2", "A3", "B3", "C3"]
+      actual = b.return_empty_spaces
+      assert_equal(expected, actual)
+    end  
+    def test_return_empty_spaces_4
+      b = Board.new
+      b.make_move("X", "A1")
+      b.make_move("O", "B2")
+      b.make_move("X", "B1")
+      b.make_move("O", "C1")
+      b.make_move("X", "A3")
+      b.make_move("O", "A2")
+      expected = ["C2", "B3", "C3"]
+      actual = b.return_empty_spaces
+      assert_equal(expected, actual)
+    end  
 end

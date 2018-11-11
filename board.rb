@@ -17,6 +17,16 @@ class Board
   def return_board
     return @current_state
   end
+  
+  def return_empty_spaces
+    result = Array.new
+    @current_state.each do |key, value|
+      if value == " "
+        result << key
+      end
+    end
+    return result
+  end
 
   def return_position(pos)
     return @current_state[pos]
