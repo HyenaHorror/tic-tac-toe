@@ -2411,4 +2411,27 @@ class TicTacToe_Test < Minitest::Test
       actual = b.return_empty_spaces
       assert_equal(expected, actual)
     end  
+    
+    def test_rand_ai_expandable1
+      b = Board.new(5)
+      rand = RandomAI.new
+      b.make_move("X", "A1")
+      b.make_move("X", "A2")
+      b.make_move("X", "A3")
+      b.make_move("X", "B1")
+      b.make_move("X", "B2")
+      b.make_move("X", "B3")
+      b.make_move("X", "C1")
+      b.make_move("X", "C2")
+      b.make_move("X", "C3")
+      expected = {
+        "A1" => "X", "A2" => "X", "A3" => "X", "A4" => " ", "A5" => " ",
+        "B1" => "X", "B2" => "X", "B3" => "X", "B4" => " ", "B5" => " ",
+        "C1" => "X", "C2" => "X", "C3" => "X", "C4" => " ", "C5" => " ",
+        "D1" => " ", "D2" => " ", "D3" => " ", "D4" => " ", "D5" => " ",
+        "E1" => " ", "E2" => " ", "E3" => " ", "E4" => " ", "E5" => " ",
+      }
+      actual = rand.make_move(b, "O")
+      refute_equal(expected, actual)
+    end
 end

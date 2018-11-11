@@ -6,12 +6,12 @@ class RandomAI
   end
 
   def make_move(board, player_piece)
-    columns = ("A".."C").to_a
-    rows = (1..3).to_a
+    positions = board.return_empty_spaces.shuffle!
     valid = "Invalid move!"
 
     until valid != "Invalid move!"
-      valid = board.make_move(player_piece, "#{columns.sample}#{rows.sample}")
+      selection = positions.pop
+      valid = board.make_move(player_piece, "#{selection}")
     end
   end
 end
