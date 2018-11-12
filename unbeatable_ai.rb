@@ -90,26 +90,36 @@ class UnbeatableAI
       end
     end
     
+    corners = find_corners(board, @size)
+    sides = find_sides(board, @size)
+    center = find_center(board, @size)
+    
     if size > 3
       # poison lines
-      # if opponent has two or more in a row, block it
-      corners = find_corners(board, @size)
-      sides = find_sides(board, @size)
-      center = find_center(board, @size)
+      # if opponent is two away from a win, poison it
+      poison = false
+      arrays_to_analyze.each do |array|
+        position = array[:position]
+        check = array[:check]
+        poison_pos = position[check.index(" ").to_i]
+        pos = check.index(" ")
+
+        poison = check.count(opponent) == size - 2 && check.count(player_piece) == 0
+        if poison == true
+          return poison_pos
+          
+        end
+      end
       
-      # if diagonal line contains 2 oppoent and no self
-      # poison
-      # if horizonal line contains 2 oppoent and no self
-      # poison
-      # if vertical line contains 2 oppoent and no self
-      # poison
+      
+      
     else
       # fork
       # create an opportunity where self has two
       # opportunities to win
-      corners = find_corners(board, @size)
-      sides = find_sides(board, @size)
-      center = find_center(board, @size)
+      # corners = find_corners(board, @size)
+      # sides = find_sides(board, @size)
+      # center = find_center(board, @size)
       # move = fork_function(board, corners, center, sides, player_piece)
       move = fork_function3x3(board, corners, center, sides, player_piece)
       unless move == nil

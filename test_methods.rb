@@ -2454,4 +2454,61 @@ class TicTacToe_Test < Minitest::Test
       }
       assert_equal(expected, actual)
     end
+    def test_unbeatable_poison_1
+      game = Game.new(5)
+      game.make_move("X", "A1")
+      game.make_move("O", "C3")
+      game.make_move("X", "E1")
+      game.make_move("O", "E5")
+      game.make_move("X", "C1")
+      game.alt_player
+      move = UnbeatableAI.new.make_move(game.return_board, "O", 5)
+      game.make_move(move)
+      actual = game.return_board
+      expected = {
+        "A1" => "X", "A2" => " ", "A3" => " ", "A4" => " ", "A5" => " ",
+        "B1" => "O", "B2" => " ", "B3" => " ", "B4" => " ", "B5" => " ",
+        "C1" => "X", "C2" => " ", "C3" => "O", "C4" => " ", "C5" => " ",
+        "D1" => " ", "D2" => " ", "D3" => " ", "D4" => " ", "D5" => " ",
+        "E1" => "X", "E2" => " ", "E3" => " ", "E4" => " ", "E5" => "O",
+      }
+      assert_equal(expected, actual)
+    end
+    def test_unbeatable_poison_2
+      game = Game.new(5)
+      game.make_move("X", "A1")
+      game.make_move("X", "C3")
+      game.make_move("X", "E5")
+      game.alt_player
+      move = UnbeatableAI.new.make_move(game.return_board, "O", 5)
+      game.make_move(move)
+      actual = game.return_board
+      expected = {
+        "A1" => "X", "A2" => " ", "A3" => " ", "A4" => " ", "A5" => " ",
+        "B1" => " ", "B2" => "O", "B3" => " ", "B4" => " ", "B5" => " ",
+        "C1" => " ", "C2" => " ", "C3" => "X", "C4" => " ", "C5" => " ",
+        "D1" => " ", "D2" => " ", "D3" => " ", "D4" => " ", "D5" => " ",
+        "E1" => " ", "E2" => " ", "E3" => " ", "E4" => " ", "E5" => "X",
+      }
+      assert_equal(expected, actual)
+    end
+    def test_unbeatable_poison_3
+      game = Game.new(5)
+      game.make_move("X", "C1")
+      game.make_move("X", "C3")
+      game.make_move("X", "C5")
+      game.alt_player
+      move = UnbeatableAI.new.make_move(game.return_board, "O", 5)
+      game.make_move(move)
+      actual = game.return_board
+      expected = {
+        "A1" => " ", "A2" => " ", "A3" => " ", "A4" => " ", "A5" => " ",
+        "B1" => " ", "B2" => " ", "B3" => " ", "B4" => " ", "B5" => " ",
+        "C1" => "X", "C2" => "O", "C3" => "X", "C4" => " ", "C5" => "X",
+        "D1" => " ", "D2" => " ", "D3" => " ", "D4" => " ", "D5" => " ",
+        "E1" => " ", "E2" => " ", "E3" => " ", "E4" => " ", "E5" => " ",
+      }
+      assert_equal(expected, actual)
+    end
+    
 end
