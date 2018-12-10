@@ -152,8 +152,10 @@ class UnbeatableAI
     end
     # center
     # take center
-    if center[:piece] == " "
-      return center[:position]
+    unless @size % 2 == 0
+      if center[:piece] == " "
+        return center[:position]
+      end
     end
 
     # opposite corner
