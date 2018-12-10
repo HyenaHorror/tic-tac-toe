@@ -110,6 +110,8 @@ get '/ai_move' do
   if session[:game].check_win == true
     session[:game].alt_player
     redirect '/end'
+  elsif session[:game].check_draw == true
+    redirect '/draw'
   else
     redirect '/game'
   end
